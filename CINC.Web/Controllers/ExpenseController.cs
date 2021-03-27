@@ -18,7 +18,12 @@ namespace CINC.Web.Controllers
         #endregion
 
 
-
+        /// <summary>
+        /// This is method to manage
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult GetExpenseByFilter(string startDate, string endDate)
         {
