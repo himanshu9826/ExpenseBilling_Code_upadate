@@ -1,0 +1,2515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CAMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dtproperties">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="property" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="objectid" Type="int" />
+          <Property Name="property" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="value" Type="varchar" MaxLength="255" />
+          <Property Name="uvalue" Type="nvarchar" MaxLength="255" />
+          <Property Name="lvalue" Type="image" />
+          <Property Name="version" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HarvestTimeTracking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Project" Type="nvarchar" MaxLength="255" />
+          <Property Name="Project Code" Type="int" />
+          <Property Name="Task" Type="nvarchar" MaxLength="255" />
+          <Property Name="First name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Last name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Note" Type="nvarchar" MaxLength="255" />
+          <Property Name="Hours rounded" Type="float" />
+          <Property Name="Invoiced" Type="nvarchar" MaxLength="255" />
+          <Property Name="Approved" Type="nvarchar" MaxLength="255" />
+          <Property Name="Department" Type="nvarchar" MaxLength="255" />
+          <Property Name="Billable" Type="nvarchar" MaxLength="255" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CAM.dbo.'Outside Members$'' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="'Outside Members$'">
+          <Property Name="F1" Type="float" />
+          <Property Name="FamilyName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Adult1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Adult2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Child1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Child2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Child3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Child4" Type="nvarchar" MaxLength="255" />
+          <Property Name="Child5" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Emergency Phone" Type="float" />
+          <Property Name="pool_tag" Type="nvarchar" MaxLength="255" />
+          <Property Name="Ind_issued" Type="nvarchar" MaxLength="255" />
+          <Property Name="No_tags" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CAM.dbo.pool_passes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="pool_passes">
+          <Key>
+            <PropertyRef Name="Previous Member" />
+          </Key>
+          <Property Name="Member Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Member Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="CityStateZip" Type="nvarchar" MaxLength="255" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="255" />
+          <Property Name="Member Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Member Phone" Type="nvarchar" MaxLength="255" />
+          <Property Name="Date Application Mailed 2009" Type="datetime" />
+          <Property Name="Renewal Price" Type="money" />
+          <Property Name="Number of Passess Issued 2009" Type="float" />
+          <Property Name="Pass Assignees 2009" Type="nvarchar" MaxLength="255" />
+          <Property Name="Previous Member" Type="bit" Nullable="false" />
+          <Property Name="Notes 2009" Type="nvarchar" MaxLength="255" />
+          <Property Name="Amount Paid 2009" Type="money" />
+          <Property Name="Date Paid 2009" Type="datetime" />
+          <Property Name="Item Type" Type="nvarchar" MaxLength="255" />
+          <Property Name="Path" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="StorageEdgeBlobs">
+          <Key>
+            <PropertyRef Name="BlobId" />
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="BlobId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SiteId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Size" Type="bigint" Nullable="false" />
+          <Property Name="Tier" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="InRBS" Type="bit" Nullable="false" />
+          <Property Name="BlobLocation" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="BlobFileName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FilterPending" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="StorageEdgeEncryptionProviders">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AssemblyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EncryptionKey" Type="text" Nullable="false" />
+          <Property Name="EncryptionKeySize" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CAM.dbo.StorageEdgeLocations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StorageEdgeLocations">
+          <Key>
+            <PropertyRef Name="ScopeId" />
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="Tier" />
+            <PropertyRef Name="BlobCount" />
+            <PropertyRef Name="TimeStamp" />
+          </Key>
+          <Property Name="ScopeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Tier" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BlobCount" Type="bigint" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StorageEdgeStorageProviders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AssemblyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ConnectionStringTitle" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ConnectionStringExample" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbAddendum">
+          <Key>
+            <PropertyRef Name="AddendumID" />
+          </Key>
+          <Property Name="AddendumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Addendum_Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tbAddendumSubType">
+          <Key>
+            <PropertyRef Name="AddendumSubID" />
+          </Key>
+          <Property Name="AddendumSubID" Type="int" Nullable="false" />
+          <Property Name="AddendumID" Type="int" />
+          <Property Name="AddendumSub_Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tbAssessmentType">
+          <Key>
+            <PropertyRef Name="AssessmentTypeId" />
+          </Key>
+          <Property Name="AssessmentTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssessmentTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbBillingData">
+          <Key>
+            <PropertyRef Name="BillingDataId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="BillingDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="AssessmentYear" Type="varchar" MaxLength="4" />
+          <Property Name="AssessmentAmount" Type="money" />
+          <Property Name="AssessmentTypeID" Type="int" />
+          <Property Name="BillingFrequencyID" Type="int" />
+          <Property Name="DueDates" Type="varchar" MaxLength="50" />
+          <Property Name="BilledByCOS" Type="bit" Nullable="false" />
+          <Property Name="LateFee" Type="money" />
+          <Property Name="LateDate" Type="numeric" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="Interest" Type="float" />
+          <Property Name="SignedResolution" Type="bit" Nullable="false" />
+          <Property Name="SetupinCinc" Type="bit" Nullable="false" />
+          <Property Name="BillingGenerated" Type="datetime" />
+          <Property Name="InsertBy" Type="varchar" MaxLength="50" />
+          <Property Name="InsertTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbBillingFrequency">
+          <Key>
+            <PropertyRef Name="tbBillingFrequencyId" />
+          </Key>
+          <Property Name="tbBillingFrequencyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tbBillingFrequencyName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CAM.dbo.tbClientContracts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbClientContracts">
+          <Key>
+            <PropertyRef Name="ContractsID" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ContractsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ActiveContract" Type="bit" />
+          <Property Name="ServiceTypeID" Type="int" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="Initial_Term_Years" Type="varchar" MaxLength="1" />
+          <Property Name="CAM_Contract" Type="bit" />
+          <Property Name="Contract_Version" Type="varchar" MaxLength="3" />
+          <Property Name="Date_Signed" Type="datetime" />
+          <Property Name="GoLiveDate" Type="datetime" />
+          <Property Name="NoUnits" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="Original_Contract_Amount" Type="money" />
+          <Property Name="Startup_Fee" Type="money" />
+          <Property Name="CPI" Type="bit" />
+          <Property Name="CurrentContractAmount" Type="money" />
+          <Property Name="Late_Fee_Percent" Type="float" />
+          <Property Name="BasicWebsite" Type="bit" />
+          <Property Name="CustomWebsite" Type="bit" />
+          <Property Name="eManageLogins" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="CollectionAgencyResolution" Type="bit" />
+          <Property Name="Inspections" Type="bit" />
+          <Property Name="NumberOfInspections" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="WalkingInspections" Type="bit" />
+          <Property Name="PMHours" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="AnnualMeeting" Type="bit" />
+          <Property Name="Number_BOD_Meetings" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="PoolMemberships" Type="bit" />
+          <Property Name="ClubhouseRentals" Type="bit" />
+          <Property Name="LeaseAdmin" Type="bit" />
+          <Property Name="MovingService" Type="bit" />
+          <Property Name="GateProgramming" Type="bit" />
+          <Property Name="ContractNotes" Type="text" />
+          <Property Name="PMCommission" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="InsertBy" Type="varchar" MaxLength="50" />
+          <Property Name="InsertTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbClientManagementData">
+          <Key>
+            <PropertyRef Name="ClientManagementDataId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientManagementDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="AnnualMeetingMonth" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="NoticeRequired" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuorumRequired" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="NoQuorumMetNewMtg" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="QuorumNotMetNewMtgDate" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="QuorumNotMetNewNotice" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="QuorumNotMetNewQuorum" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalBoardMembers" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="StaggeredTerms" Type="bit" Nullable="false" />
+          <Property Name="BudgetRatRequired" Type="bit" Nullable="false" />
+          <Property Name="InsertBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InsertTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tbClientPI">
+          <Key>
+            <PropertyRef Name="Client_ID" />
+          </Key>
+          <Property Name="Client_ID" Type="int" Nullable="false" />
+          <Property Name="PI_ID" Type="int" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="Frequency" Type="varchar" MaxLength="50" />
+          <Property Name="Walking_Insp" Type="bit" />
+          <Property Name="Checklist" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbClientPM">
+          <Key>
+            <PropertyRef Name="pmID" />
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="pmID" Type="int" Nullable="false" />
+          <Property Name="clientID" Type="int" Nullable="false" />
+          <Property Name="commission" Type="float" Nullable="false" />
+          <Property Name="datecreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CAM.dbo.tbClientPool' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbClientPool">
+          <Key>
+            <PropertyRef Name="ClientPoolId" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Allow_Outside_Pool" />
+          </Key>
+          <Property Name="ClientPoolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Allow_Outside_Pool" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbClientPoolFees">
+          <Key>
+            <PropertyRef Name="ClientPoolFeesID" />
+          </Key>
+          <Property Name="ClientPoolFeesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="fee" Type="money" />
+          <Property Name="description" Type="varchar" MaxLength="100" />
+          <Property Name="Cal_Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbClientRelation">
+          <Key>
+            <PropertyRef Name="RelationID" />
+          </Key>
+          <Property Name="RelationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Relation_Description" Type="varchar" MaxLength="250" />
+          <Property Name="createdate" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="modifydate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbClients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Client_Name" Type="varchar" MaxLength="1000" />
+          <Property Name="website_url" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Fed_tax_id" Type="varchar" MaxLength="50" />
+          <Property Name="ServiceTypeID" Type="int" />
+          <Property Name="RegionID" Type="int" />
+          <Property Name="Date_To_New_Mngmnt" Type="smalldatetime" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="ZipCode" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="Insertby" Type="varchar" MaxLength="50" />
+          <Property Name="InsertTime" Type="datetime" />
+          <Property Name="PMID" Type="int" />
+          <Property Name="PIID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbExpenseBatch">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbExpenseItem">
+          <Key>
+            <PropertyRef Name="InvoiceItemID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="InvoiceItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="text" />
+          <Property Name="Extended_Price" Type="money" />
+          <Property Name="invoicedate" Type="datetime" />
+          <Property Name="Exported" Type="bit" Nullable="false" />
+          <Property Name="Exported_On" Type="datetime" />
+          <Property Name="logon_user" Type="varchar" MaxLength="50" />
+          <Property Name="date_created" Type="datetime" Nullable="false" />
+          <Property Name="BatchID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbMembers">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FamilyName" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="emergency_phone" Type="varchar" MaxLength="50" />
+          <Property Name="emergency_contact" Type="varchar" MaxLength="100" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="csz" Type="varchar" MaxLength="100" />
+          <Property Name="neighborhood" Type="varchar" MaxLength="50" />
+          <Property Name="clientID" Type="int" />
+          <Property Name="referer" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="tbMembership">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="MembershipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="cal_year" Type="int" />
+          <Property Name="adult1" Type="varchar" MaxLength="50" />
+          <Property Name="adult2" Type="varchar" MaxLength="50" />
+          <Property Name="child1" Type="varchar" MaxLength="50" />
+          <Property Name="child2" Type="varchar" MaxLength="50" />
+          <Property Name="child3" Type="varchar" MaxLength="50" />
+          <Property Name="child4" Type="varchar" MaxLength="50" />
+          <Property Name="child5" Type="varchar" MaxLength="50" />
+          <Property Name="amount_paid" Type="money" />
+          <Property Name="date_paid" Type="datetime" />
+          <Property Name="check_no" Type="varchar" MaxLength="50" />
+          <Property Name="note" Type="text" />
+          <Property Name="num_passes" Type="int" />
+          <Property Name="statusID" Type="int" Nullable="false" />
+          <Property Name="membership_plan" Type="int" />
+          <Property Name="PassNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbMembershipLog">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="MembershipID" Type="int" Nullable="false" />
+          <Property Name="pooltag_appln_rcvd" Type="bit" Nullable="false" />
+          <Property Name="indem_waiver_rcvd" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="appln_mailed" Type="datetime" />
+          <Property Name="mail_merge_exported" Type="bit" Nullable="false" />
+          <Property Name="lifeguard_exported" Type="bit" Nullable="false" />
+          <Property Name="PassMailed" Type="datetime" />
+          <Property Name="AssociationMember" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbNewManagementCompany">
+          <Key>
+            <PropertyRef Name="NewManagementCompanyId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="NewManagementCompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="NewCompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="ContactName" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="Address1" Type="varchar" MaxLength="100" />
+          <Property Name="Address2" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="Zip" Type="int" />
+          <Property Name="InsertBy" Type="varchar" MaxLength="50" />
+          <Property Name="InsertTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbPI">
+          <Key>
+            <PropertyRef Name="PI_ID" />
+          </Key>
+          <Property Name="PI_ID" Type="int" Nullable="false" />
+          <Property Name="PI_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPM">
+          <Key>
+            <PropertyRef Name="PMID" />
+          </Key>
+          <Property Name="PMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="datecreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPoolMembers">
+          <Key>
+            <PropertyRef Name="PoolMemberID" />
+          </Key>
+          <Property Name="PoolMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="familyname" Type="varchar" MaxLength="50" />
+          <Property Name="adult1" Type="varchar" MaxLength="50" />
+          <Property Name="adult2" Type="varchar" MaxLength="50" />
+          <Property Name="child1" Type="varchar" MaxLength="50" />
+          <Property Name="child2" Type="varchar" MaxLength="50" />
+          <Property Name="child3" Type="varchar" MaxLength="50" />
+          <Property Name="child4" Type="varchar" MaxLength="50" />
+          <Property Name="child5" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="previous_member" Type="bit" Nullable="false" />
+          <Property Name="emergency_phone" Type="varchar" MaxLength="50" />
+          <Property Name="pooltag_appln_rcvd" Type="bit" Nullable="false" />
+          <Property Name="indem_waiver_rcvd" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="csz" Type="varchar" MaxLength="100" />
+          <Property Name="neighborhood" Type="varchar" MaxLength="50" />
+          <Property Name="prev_amount_paid" Type="money" />
+          <Property Name="amount_paid" Type="money" />
+          <Property Name="date_paid" Type="datetime" />
+          <Property Name="check_no" Type="varchar" MaxLength="50" />
+          <Property Name="note" Type="text" />
+          <Property Name="num_passes" Type="int" />
+          <Property Name="cal_year" Type="int" />
+          <Property Name="clientID" Type="int" />
+          <Property Name="appln_mailed" Type="datetime" />
+          <Property Name="mail_merge_exported" Type="bit" Nullable="false" />
+          <Property Name="lifeguard_exported" Type="bit" Nullable="false" />
+          <Property Name="statusID" Type="int" Nullable="false" />
+          <Property Name="membership_plan" Type="int" Nullable="false" />
+          <Property Name="newmember" Type="varchar" MaxLength="3" />
+          <Property Name="referer" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CAM.dbo.tbPoolPasses$' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbPoolPasses$">
+          <Key>
+            <PropertyRef Name="previous_member" />
+          </Key>
+          <Property Name="familyname" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="previous_member" Type="bit" Nullable="false" />
+          <Property Name="emergency_phone" Type="nvarchar" MaxLength="255" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
+          <Property Name="csz" Type="nvarchar" MaxLength="255" />
+          <Property Name="renewal_price" Type="money" />
+          <Property Name="cal_year" Type="float" />
+          <Property Name="clientID" Type="float" />
+        </EntityType>
+        <EntityType Name="tbPoolStatus">
+          <Key>
+            <PropertyRef Name="PoolStatusID" />
+          </Key>
+          <Property Name="PoolStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbPreviousManagementCompany">
+          <Key>
+            <PropertyRef Name="PreviousManagementCompanyId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="PreviousManagementCompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="ContactName" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="Address1" Type="varchar" MaxLength="100" />
+          <Property Name="Address2" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="Zip" Type="varchar" MaxLength="10" />
+          <Property Name="InsertBy" Type="varchar" MaxLength="50" />
+          <Property Name="InsertTime" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CAM.dbo.tbProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbProducts">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Product_Description" Type="varchar" MaxLength="50" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="AddendumSubID" Type="int" />
+          <Property Name="Commission" Type="float" />
+          <Property Name="Commission_Salaried" Type="bit" />
+          <Property Name="CAMGL" Type="nvarchar" MaxLength="7" />
+          <Property Name="AGL" Type="nchar" MaxLength="10" />
+          <Property Name="Department" Type="varchar" MaxLength="50" />
+          <Property Name="AutoBill" Type="bit" />
+          <Property Name="Active" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbRegion">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbServiceType">
+          <Key>
+            <PropertyRef Name="ServiceTypeID" />
+          </Key>
+          <Property Name="ServiceTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="datecreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbStates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="abr" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tbTimeDetail">
+          <Key>
+            <PropertyRef Name="TimeDetailId" />
+          </Key>
+          <Property Name="TimeDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="Original_Date" Type="datetime" Nullable="false" />
+          <Property Name="PMID" Type="int" Nullable="false" />
+          <Property Name="Mgr_Time_In" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Mgr_Time_Out" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Mgr_Time_Mtg" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Total_CSS_Tickets" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Total_Calls" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Total_Call_Time" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Time_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Association_ID" Type="int" />
+          <Property Name="Event_Date" Type="datetime" />
+          <Property Name="Mgr_Name" Type="int" />
+          <Property Name="Mgr_Time_In" Type="float" />
+          <Property Name="Mgr_Time_out" Type="float" />
+          <Property Name="Mgr_Time_Mtg" Type="float" />
+          <Property Name="Total_Css_Tickets" Type="int" />
+          <Property Name="Total_Calls" Type="int" />
+          <Property Name="Total_Call_Time" Type="float" />
+          <Property Name="upsize_ts" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CAM.dbo.tmp_Pool_Membership_Mailing_List' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tmp_Pool_Membership_Mailing_List">
+          <Property Name="HOA_Name" Type="varchar" MaxLength="100" />
+          <Property Name="familyname" Type="varchar" MaxLength="100" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="csz" Type="varchar" MaxLength="50" />
+          <Property Name="neighborhood" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <Association Name="fk_tbAddendumSubType_tbAddendum">
+          <End Role="tbAddendum" Type="Self.tbAddendum" Multiplicity="0..1" />
+          <End Role="tbAddendumSubType" Type="Self.tbAddendumSubType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAddendum">
+              <PropertyRef Name="AddendumID" />
+            </Principal>
+            <Dependent Role="tbAddendumSubType">
+              <PropertyRef Name="AddendumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbBillingData_tbAssessmentType">
+          <End Role="tbAssessmentType" Type="Self.tbAssessmentType" Multiplicity="0..1" />
+          <End Role="tbBillingData" Type="Self.tbBillingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAssessmentType">
+              <PropertyRef Name="AssessmentTypeId" />
+            </Principal>
+            <Dependent Role="tbBillingData">
+              <PropertyRef Name="AssessmentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbBillingData_tbBillingFrequency">
+          <End Role="tbBillingFrequency" Type="Self.tbBillingFrequency" Multiplicity="0..1" />
+          <End Role="tbBillingData" Type="Self.tbBillingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBillingFrequency">
+              <PropertyRef Name="tbBillingFrequencyId" />
+            </Principal>
+            <Dependent Role="tbBillingData">
+              <PropertyRef Name="BillingFrequencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbBillingData_tbClients">
+          <End Role="tbClients" Type="Self.tbClients" Multiplicity="1" />
+          <End Role="tbBillingData" Type="Self.tbBillingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbBillingData">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientContracts_tbClients">
+          <End Role="tbClients" Type="Self.tbClients" Multiplicity="1" />
+          <End Role="tbClientContracts" Type="Self.tbClientContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbClientContracts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientContracts_tbServiceType">
+          <End Role="tbServiceType" Type="Self.tbServiceType" Multiplicity="0..1" />
+          <End Role="tbClientContracts" Type="Self.tbClientContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbServiceType">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="tbClientContracts">
+              <PropertyRef Name="ServiceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientContracts_tbStates">
+          <End Role="tbStates" Type="Self.tbStates" Multiplicity="0..1" />
+          <End Role="tbClientContracts" Type="Self.tbClientContracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbClientContracts">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientManagementData_tbClients">
+          <End Role="tbClients" Type="Self.tbClients" Multiplicity="1" />
+          <End Role="tbClientManagementData" Type="Self.tbClientManagementData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbClientManagementData">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembers_tbClients">
+          <End Role="tbClients" Type="Self.tbClients" Multiplicity="0..1" />
+          <End Role="tbMembers" Type="Self.tbMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbMembers">
+              <PropertyRef Name="clientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembership_tbClientPoolFees">
+          <End Role="tbClientPoolFees" Type="Self.tbClientPoolFees" Multiplicity="0..1" />
+          <End Role="tbMembership" Type="Self.tbMembership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientPoolFees">
+              <PropertyRef Name="ClientPoolFeesID" />
+            </Principal>
+            <Dependent Role="tbMembership">
+              <PropertyRef Name="membership_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembership_tbMembers">
+          <End Role="tbMembers" Type="Self.tbMembers" Multiplicity="1" />
+          <End Role="tbMembership" Type="Self.tbMembership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMembers">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="tbMembership">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembershipLog_tbMembership">
+          <End Role="tbMembership" Type="Self.tbMembership" Multiplicity="1" />
+          <End Role="tbMembershipLog" Type="Self.tbMembershipLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbMembership">
+              <PropertyRef Name="MembershipID" />
+            </Principal>
+            <Dependent Role="tbMembershipLog">
+              <PropertyRef Name="MembershipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbNewManagementCompany_tbClients">
+          <End Role="tbClients" Type="Self.tbClients" Multiplicity="1" />
+          <End Role="tbNewManagementCompany" Type="Self.tbNewManagementCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbNewManagementCompany">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbPreviousManagementCompany_tbClients">
+          <End Role="tbClients" Type="Self.tbClients" Multiplicity="1" />
+          <End Role="tbPreviousManagementCompany" Type="Self.tbPreviousManagementCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbPreviousManagementCompany">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbProducts_tbAddendumSubType">
+          <End Role="tbAddendumSubType" Type="Self.tbAddendumSubType" Multiplicity="0..1" />
+          <End Role="tbProducts" Type="Self.tbProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAddendumSubType">
+              <PropertyRef Name="AddendumSubID" />
+            </Principal>
+            <Dependent Role="tbProducts">
+              <PropertyRef Name="AddendumSubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbTimeDetail_tbClients">
+          <End Role="tbClients" Type="Self.tbClients" Multiplicity="1" />
+          <End Role="tbTimeDetail" Type="Self.tbTimeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbTimeDetail">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CAMModelStoreContainer">
+          <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HarvestTimeTracking" EntityType="Self.HarvestTimeTracking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageEdgeBlobs" EntityType="Self.StorageEdgeBlobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageEdgeEncryptionProviders" EntityType="Self.StorageEdgeEncryptionProviders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StorageEdgeStorageProviders" EntityType="Self.StorageEdgeStorageProviders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAddendum" EntityType="Self.tbAddendum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAddendumSubType" EntityType="Self.tbAddendumSubType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAssessmentType" EntityType="Self.tbAssessmentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbBillingData" EntityType="Self.tbBillingData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbBillingFrequency" EntityType="Self.tbBillingFrequency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClientManagementData" EntityType="Self.tbClientManagementData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClientPI" EntityType="Self.tbClientPI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClientPM" EntityType="Self.tbClientPM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClientPoolFees" EntityType="Self.tbClientPoolFees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClientRelation" EntityType="Self.tbClientRelation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbClients" EntityType="Self.tbClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbExpenseBatch" EntityType="Self.tbExpenseBatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbExpenseItem" EntityType="Self.tbExpenseItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbMembers" EntityType="Self.tbMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbMembership" EntityType="Self.tbMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbMembershipLog" EntityType="Self.tbMembershipLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbNewManagementCompany" EntityType="Self.tbNewManagementCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPI" EntityType="Self.tbPI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPM" EntityType="Self.tbPM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPoolMembers" EntityType="Self.tbPoolMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPoolStatus" EntityType="Self.tbPoolStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPreviousManagementCompany" EntityType="Self.tbPreviousManagementCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbRegion" EntityType="Self.tbRegion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbServiceType" EntityType="Self.tbServiceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbStates" EntityType="Self.tbStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbTimeDetail" EntityType="Self.tbTimeDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Time_Detail" EntityType="Self.Time_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pool_passes" EntityType="Self.pool_passes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[pool_passes].[Member Name] AS [Member Name], 
+[pool_passes].[Member Address] AS [Member Address], 
+[pool_passes].[CityStateZip] AS [CityStateZip], 
+[pool_passes].[Neighborhood] AS [Neighborhood], 
+[pool_passes].[Member Email] AS [Member Email], 
+[pool_passes].[Member Phone] AS [Member Phone], 
+[pool_passes].[Date Application Mailed 2009] AS [Date Application Mailed 2009], 
+[pool_passes].[Renewal Price] AS [Renewal Price], 
+[pool_passes].[Number of Passess Issued 2009] AS [Number of Passess Issued 2009], 
+[pool_passes].[Pass Assignees 2009] AS [Pass Assignees 2009], 
+[pool_passes].[Previous Member] AS [Previous Member], 
+[pool_passes].[Notes 2009] AS [Notes 2009], 
+[pool_passes].[Amount Paid 2009] AS [Amount Paid 2009], 
+[pool_passes].[Date Paid 2009] AS [Date Paid 2009], 
+[pool_passes].[Item Type] AS [Item Type], 
+[pool_passes].[Path] AS [Path]
+FROM [dbo].[pool_passes] AS [pool_passes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StorageEdgeLocations" EntityType="Self.StorageEdgeLocations" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[StorageEdgeLocations].[ScopeId] AS [ScopeId], 
+[StorageEdgeLocations].[Location] AS [Location], 
+[StorageEdgeLocations].[Tier] AS [Tier], 
+[StorageEdgeLocations].[BlobCount] AS [BlobCount], 
+[StorageEdgeLocations].[TimeStamp] AS [TimeStamp]
+FROM [dbo].[StorageEdgeLocations] AS [StorageEdgeLocations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbClientContracts" EntityType="Self.tbClientContracts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[tbClientContracts].[ContractsID] AS [ContractsID], 
+[tbClientContracts].[ClientID] AS [ClientID], 
+[tbClientContracts].[ActiveContract] AS [ActiveContract], 
+[tbClientContracts].[ServiceTypeID] AS [ServiceTypeID], 
+[tbClientContracts].[StateID] AS [StateID], 
+[tbClientContracts].[Initial_Term_Years] AS [Initial_Term_Years], 
+[tbClientContracts].[CAM_Contract] AS [CAM_Contract], 
+[tbClientContracts].[Contract_Version] AS [Contract_Version], 
+[tbClientContracts].[Date_Signed] AS [Date_Signed], 
+[tbClientContracts].[GoLiveDate] AS [GoLiveDate], 
+[tbClientContracts].[NoUnits] AS [NoUnits], 
+[tbClientContracts].[Original_Contract_Amount] AS [Original_Contract_Amount], 
+[tbClientContracts].[Startup_Fee] AS [Startup_Fee], 
+[tbClientContracts].[CPI] AS [CPI], 
+[tbClientContracts].[CurrentContractAmount] AS [CurrentContractAmount], 
+[tbClientContracts].[Late_Fee_Percent] AS [Late_Fee_Percent], 
+[tbClientContracts].[BasicWebsite] AS [BasicWebsite], 
+[tbClientContracts].[CustomWebsite] AS [CustomWebsite], 
+[tbClientContracts].[eManageLogins] AS [eManageLogins], 
+[tbClientContracts].[CollectionAgencyResolution] AS [CollectionAgencyResolution], 
+[tbClientContracts].[Inspections] AS [Inspections], 
+[tbClientContracts].[NumberOfInspections] AS [NumberOfInspections], 
+[tbClientContracts].[WalkingInspections] AS [WalkingInspections], 
+[tbClientContracts].[PMHours] AS [PMHours], 
+[tbClientContracts].[AnnualMeeting] AS [AnnualMeeting], 
+[tbClientContracts].[Number_BOD_Meetings] AS [Number_BOD_Meetings], 
+[tbClientContracts].[PoolMemberships] AS [PoolMemberships], 
+[tbClientContracts].[ClubhouseRentals] AS [ClubhouseRentals], 
+[tbClientContracts].[LeaseAdmin] AS [LeaseAdmin], 
+[tbClientContracts].[MovingService] AS [MovingService], 
+[tbClientContracts].[GateProgramming] AS [GateProgramming], 
+[tbClientContracts].[ContractNotes] AS [ContractNotes], 
+[tbClientContracts].[PMCommission] AS [PMCommission], 
+[tbClientContracts].[InsertBy] AS [InsertBy], 
+[tbClientContracts].[InsertTime] AS [InsertTime]
+FROM [dbo].[tbClientContracts] AS [tbClientContracts]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbClientPool" EntityType="Self.tbClientPool" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[tbClientPool].[ClientPoolId] AS [ClientPoolId], 
+[tbClientPool].[ClientID] AS [ClientID], 
+[tbClientPool].[Allow_Outside_Pool] AS [Allow_Outside_Pool]
+FROM [dbo].[tbClientPool] AS [tbClientPool]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbPoolPasses$" EntityType="Self.tbPoolPasses$" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[tbPoolPasses$].[familyname] AS [familyname], 
+[tbPoolPasses$].[email] AS [email], 
+[tbPoolPasses$].[previous_member] AS [previous_member], 
+[tbPoolPasses$].[emergency_phone] AS [emergency_phone], 
+[tbPoolPasses$].[address] AS [address], 
+[tbPoolPasses$].[csz] AS [csz], 
+[tbPoolPasses$].[renewal_price] AS [renewal_price], 
+[tbPoolPasses$].[cal_year] AS [cal_year], 
+[tbPoolPasses$].[clientID] AS [clientID]
+FROM [dbo].[tbPoolPasses$] AS [tbPoolPasses$]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbProducts" EntityType="Self.tbProducts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[tbProducts].[ProductID] AS [ProductID], 
+[tbProducts].[Product_Description] AS [Product_Description], 
+[tbProducts].[UnitPrice] AS [UnitPrice], 
+[tbProducts].[AddendumSubID] AS [AddendumSubID], 
+[tbProducts].[Commission] AS [Commission], 
+[tbProducts].[Commission_Salaried] AS [Commission_Salaried], 
+[tbProducts].[CAMGL] AS [CAMGL], 
+[tbProducts].[AGL] AS [AGL], 
+[tbProducts].[Department] AS [Department], 
+[tbProducts].[AutoBill] AS [AutoBill], 
+[tbProducts].[Active] AS [Active]
+FROM [dbo].[tbProducts] AS [tbProducts]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_tbAddendumSubType_tbAddendum" Association="Self.fk_tbAddendumSubType_tbAddendum">
+            <End Role="tbAddendum" EntitySet="tbAddendum" />
+            <End Role="tbAddendumSubType" EntitySet="tbAddendumSubType" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbBillingData_tbAssessmentType" Association="Self.fk_tbBillingData_tbAssessmentType">
+            <End Role="tbAssessmentType" EntitySet="tbAssessmentType" />
+            <End Role="tbBillingData" EntitySet="tbBillingData" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbBillingData_tbBillingFrequency" Association="Self.fk_tbBillingData_tbBillingFrequency">
+            <End Role="tbBillingFrequency" EntitySet="tbBillingFrequency" />
+            <End Role="tbBillingData" EntitySet="tbBillingData" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbBillingData_tbClients" Association="Self.fk_tbBillingData_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbBillingData" EntitySet="tbBillingData" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientContracts_tbClients" Association="Self.fk_tbClientContracts_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbClientContracts" EntitySet="tbClientContracts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientContracts_tbServiceType" Association="Self.fk_tbClientContracts_tbServiceType">
+            <End Role="tbServiceType" EntitySet="tbServiceType" />
+            <End Role="tbClientContracts" EntitySet="tbClientContracts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientContracts_tbStates" Association="Self.fk_tbClientContracts_tbStates">
+            <End Role="tbStates" EntitySet="tbStates" />
+            <End Role="tbClientContracts" EntitySet="tbClientContracts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientManagementData_tbClients" Association="Self.fk_tbClientManagementData_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbClientManagementData" EntitySet="tbClientManagementData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembers_tbClients" Association="Self.FK_tbMembers_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbMembers" EntitySet="tbMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembership_tbClientPoolFees" Association="Self.FK_tbMembership_tbClientPoolFees">
+            <End Role="tbClientPoolFees" EntitySet="tbClientPoolFees" />
+            <End Role="tbMembership" EntitySet="tbMembership" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembership_tbMembers" Association="Self.FK_tbMembership_tbMembers">
+            <End Role="tbMembers" EntitySet="tbMembers" />
+            <End Role="tbMembership" EntitySet="tbMembership" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembershipLog_tbMembership" Association="Self.FK_tbMembershipLog_tbMembership">
+            <End Role="tbMembership" EntitySet="tbMembership" />
+            <End Role="tbMembershipLog" EntitySet="tbMembershipLog" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbNewManagementCompany_tbClients" Association="Self.fk_tbNewManagementCompany_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbNewManagementCompany" EntitySet="tbNewManagementCompany" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbPreviousManagementCompany_tbClients" Association="Self.fk_tbPreviousManagementCompany_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbPreviousManagementCompany" EntitySet="tbPreviousManagementCompany" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbProducts_tbAddendumSubType" Association="Self.fk_tbProducts_tbAddendumSubType">
+            <End Role="tbAddendumSubType" EntitySet="tbAddendumSubType" />
+            <End Role="tbProducts" EntitySet="tbProducts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbTimeDetail_tbClients" Association="Self.fk_tbTimeDetail_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbTimeDetail" EntitySet="tbTimeDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CAMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="dtproperty">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="property" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="objectid" Type="Int32" />
+          <Property Name="property" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="value" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="uvalue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lvalue" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="version" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HarvestTimeTracking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Project" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Project_Code" Type="Int32" />
+          <Property Name="Task" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="First_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Hours_rounded" Type="Double" />
+          <Property Name="Invoiced" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Approved" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Billable" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="StorageEdgeBlob">
+          <Key>
+            <PropertyRef Name="BlobId" />
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="BlobId" Type="Guid" Nullable="false" />
+          <Property Name="SiteId" Type="Guid" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Size" Type="Int64" Nullable="false" />
+          <Property Name="Tier" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InRBS" Type="Boolean" Nullable="false" />
+          <Property Name="BlobLocation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BlobFileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilterPending" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StorageEdgeEncryptionProvider">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssemblyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EncryptionKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EncryptionKeySize" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StorageEdgeStorageProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssemblyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClassName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConnectionStringTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConnectionStringExample" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbAddendum">
+          <Key>
+            <PropertyRef Name="AddendumID" />
+          </Key>
+          <Property Name="AddendumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Addendum_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbAddendumSubTypes" Relationship="Self.fk_tbAddendumSubType_tbAddendum" FromRole="tbAddendum" ToRole="tbAddendumSubType" />
+        </EntityType>
+        <EntityType Name="tbAddendumSubType">
+          <Key>
+            <PropertyRef Name="AddendumSubID" />
+          </Key>
+          <Property Name="AddendumSubID" Type="Int32" Nullable="false" />
+          <Property Name="AddendumID" Type="Int32" />
+          <Property Name="AddendumSub_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbAddendum" Relationship="Self.fk_tbAddendumSubType_tbAddendum" FromRole="tbAddendumSubType" ToRole="tbAddendum" />
+          <NavigationProperty Name="tbProducts" Relationship="Self.fk_tbProducts_tbAddendumSubType" FromRole="tbAddendumSubType" ToRole="tbProducts" />
+        </EntityType>
+        <EntityType Name="tbAssessmentType">
+          <Key>
+            <PropertyRef Name="AssessmentTypeId" />
+          </Key>
+          <Property Name="AssessmentTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssessmentTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbBillingDatas" Relationship="Self.fk_tbBillingData_tbAssessmentType" FromRole="tbAssessmentType" ToRole="tbBillingData" />
+        </EntityType>
+        <EntityType Name="tbBillingData">
+          <Key>
+            <PropertyRef Name="BillingDataId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="BillingDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="AssessmentYear" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="AssessmentAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AssessmentTypeID" Type="Int32" />
+          <Property Name="BillingFrequencyID" Type="Int32" />
+          <Property Name="DueDates" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BilledByCOS" Type="Boolean" Nullable="false" />
+          <Property Name="LateFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LateDate" Type="Decimal" Precision="2" Scale="0" Nullable="false" />
+          <Property Name="Interest" Type="Double" />
+          <Property Name="SignedResolution" Type="Boolean" Nullable="false" />
+          <Property Name="SetupinCinc" Type="Boolean" Nullable="false" />
+          <Property Name="BillingGenerated" Type="DateTime" Precision="3" />
+          <Property Name="InsertBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InsertTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbAssessmentType" Relationship="Self.fk_tbBillingData_tbAssessmentType" FromRole="tbBillingData" ToRole="tbAssessmentType" />
+          <NavigationProperty Name="tbBillingFrequency" Relationship="Self.fk_tbBillingData_tbBillingFrequency" FromRole="tbBillingData" ToRole="tbBillingFrequency" />
+          <NavigationProperty Name="tbClient" Relationship="Self.fk_tbBillingData_tbClients" FromRole="tbBillingData" ToRole="tbClients" />
+        </EntityType>
+        <EntityType Name="tbBillingFrequency">
+          <Key>
+            <PropertyRef Name="tbBillingFrequencyId" />
+          </Key>
+          <Property Name="tbBillingFrequencyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tbBillingFrequencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbBillingDatas" Relationship="Self.fk_tbBillingData_tbBillingFrequency" FromRole="tbBillingFrequency" ToRole="tbBillingData" />
+        </EntityType>
+        <EntityType Name="tbClientManagementData">
+          <Key>
+            <PropertyRef Name="ClientManagementDataId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientManagementDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="AnnualMeetingMonth" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NoticeRequired" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuorumRequired" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NoQuorumMetNewMtg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuorumNotMetNewMtgDate" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuorumNotMetNewNotice" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuorumNotMetNewQuorum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TotalBoardMembers" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StaggeredTerms" Type="Boolean" Nullable="false" />
+          <Property Name="BudgetRatRequired" Type="Boolean" Nullable="false" />
+          <Property Name="InsertBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InsertTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tbClient" Relationship="Self.fk_tbClientManagementData_tbClients" FromRole="tbClientManagementData" ToRole="tbClients" />
+        </EntityType>
+        <EntityType Name="tbClientPI">
+          <Key>
+            <PropertyRef Name="Client_ID" />
+          </Key>
+          <Property Name="Client_ID" Type="Int32" Nullable="false" />
+          <Property Name="PI_ID" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Walking_Insp" Type="Boolean" />
+          <Property Name="Checklist" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbClientPM">
+          <Key>
+            <PropertyRef Name="pmID" />
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="pmID" Type="Int32" Nullable="false" />
+          <Property Name="clientID" Type="Int32" Nullable="false" />
+          <Property Name="commission" Type="Double" Nullable="false" />
+          <Property Name="datecreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbClientPoolFee">
+          <Key>
+            <PropertyRef Name="ClientPoolFeesID" />
+          </Key>
+          <Property Name="ClientPoolFeesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cal_Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbMemberships" Relationship="Self.FK_tbMembership_tbClientPoolFees" FromRole="tbClientPoolFees" ToRole="tbMembership" />
+        </EntityType>
+        <EntityType Name="tbClientRelation">
+          <Key>
+            <PropertyRef Name="RelationID" />
+          </Key>
+          <Property Name="RelationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Relation_Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="createdate" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="modifydate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbClient">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Client_Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="website_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Fed_tax_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceTypeID" Type="Int32" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="Date_To_New_Mngmnt" Type="DateTime" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="ZipCode" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Insertby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InsertTime" Type="DateTime" Precision="3" />
+          <Property Name="PMID" Type="Int32" />
+          <Property Name="PIID" Type="Int32" />
+          <NavigationProperty Name="tbBillingDatas" Relationship="Self.fk_tbBillingData_tbClients" FromRole="tbClients" ToRole="tbBillingData" />
+          <NavigationProperty Name="tbClientManagementDatas" Relationship="Self.fk_tbClientManagementData_tbClients" FromRole="tbClients" ToRole="tbClientManagementData" />
+          <NavigationProperty Name="tbClientContracts" Relationship="Self.fk_tbClientContracts_tbClients" FromRole="tbClients" ToRole="tbClientContracts" />
+          <NavigationProperty Name="tbMembers" Relationship="Self.FK_tbMembers_tbClients" FromRole="tbClients" ToRole="tbMembers" />
+          <NavigationProperty Name="tbNewManagementCompanies" Relationship="Self.fk_tbNewManagementCompany_tbClients" FromRole="tbClients" ToRole="tbNewManagementCompany" />
+          <NavigationProperty Name="tbPreviousManagementCompanies" Relationship="Self.fk_tbPreviousManagementCompany_tbClients" FromRole="tbClients" ToRole="tbPreviousManagementCompany" />
+          <NavigationProperty Name="tbTimeDetails" Relationship="Self.fk_tbTimeDetail_tbClients" FromRole="tbClients" ToRole="tbTimeDetail" />
+        </EntityType>
+        <EntityType Name="tbExpenseBatch">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbExpenseItem">
+          <Key>
+            <PropertyRef Name="InvoiceItemID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="InvoiceItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Extended_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="invoicedate" Type="DateTime" Precision="3" />
+          <Property Name="Exported" Type="Boolean" Nullable="false" />
+          <Property Name="Exported_On" Type="DateTime" Precision="3" />
+          <Property Name="logon_user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BatchID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbMember">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FamilyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="emergency_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emergency_contact" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="csz" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clientID" Type="Int32" />
+          <Property Name="referer" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbClient" Relationship="Self.FK_tbMembers_tbClients" FromRole="tbMembers" ToRole="tbClients" />
+          <NavigationProperty Name="tbMemberships" Relationship="Self.FK_tbMembership_tbMembers" FromRole="tbMembers" ToRole="tbMembership" />
+        </EntityType>
+        <EntityType Name="tbMembership">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="MembershipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="cal_year" Type="Int32" />
+          <Property Name="adult1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adult2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="amount_paid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="date_paid" Type="DateTime" Precision="3" />
+          <Property Name="check_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="num_passes" Type="Int32" />
+          <Property Name="statusID" Type="Int32" Nullable="false" />
+          <Property Name="membership_plan" Type="Int32" />
+          <Property Name="PassNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbClientPoolFee" Relationship="Self.FK_tbMembership_tbClientPoolFees" FromRole="tbMembership" ToRole="tbClientPoolFees" />
+          <NavigationProperty Name="tbMember" Relationship="Self.FK_tbMembership_tbMembers" FromRole="tbMembership" ToRole="tbMembers" />
+          <NavigationProperty Name="tbMembershipLog" Relationship="Self.FK_tbMembershipLog_tbMembership" FromRole="tbMembership" ToRole="tbMembershipLog" />
+        </EntityType>
+        <EntityType Name="tbMembershipLog">
+          <Key>
+            <PropertyRef Name="MembershipID" />
+          </Key>
+          <Property Name="MembershipID" Type="Int32" Nullable="false" />
+          <Property Name="pooltag_appln_rcvd" Type="Boolean" Nullable="false" />
+          <Property Name="indem_waiver_rcvd" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="appln_mailed" Type="DateTime" Precision="3" />
+          <Property Name="mail_merge_exported" Type="Boolean" Nullable="false" />
+          <Property Name="lifeguard_exported" Type="Boolean" Nullable="false" />
+          <Property Name="PassMailed" Type="DateTime" Precision="3" />
+          <Property Name="AssociationMember" Type="Boolean" />
+          <NavigationProperty Name="tbMembership" Relationship="Self.FK_tbMembershipLog_tbMembership" FromRole="tbMembershipLog" ToRole="tbMembership" />
+        </EntityType>
+        <EntityType Name="tbNewManagementCompany">
+          <Key>
+            <PropertyRef Name="NewManagementCompanyId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="NewManagementCompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="NewCompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="Zip" Type="Int32" />
+          <Property Name="InsertBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InsertTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbClient" Relationship="Self.fk_tbNewManagementCompany_tbClients" FromRole="tbNewManagementCompany" ToRole="tbClients" />
+        </EntityType>
+        <EntityType Name="tbPI">
+          <Key>
+            <PropertyRef Name="PI_ID" />
+          </Key>
+          <Property Name="PI_ID" Type="Int32" Nullable="false" />
+          <Property Name="PI_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPM">
+          <Key>
+            <PropertyRef Name="PMID" />
+          </Key>
+          <Property Name="PMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="datecreated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbPoolMember">
+          <Key>
+            <PropertyRef Name="PoolMemberID" />
+          </Key>
+          <Property Name="PoolMemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="familyname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adult1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adult2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="child5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="previous_member" Type="Boolean" Nullable="false" />
+          <Property Name="emergency_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pooltag_appln_rcvd" Type="Boolean" Nullable="false" />
+          <Property Name="indem_waiver_rcvd" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="csz" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prev_amount_paid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="amount_paid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="date_paid" Type="DateTime" Precision="3" />
+          <Property Name="check_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="num_passes" Type="Int32" />
+          <Property Name="cal_year" Type="Int32" />
+          <Property Name="clientID" Type="Int32" />
+          <Property Name="appln_mailed" Type="DateTime" Precision="3" />
+          <Property Name="mail_merge_exported" Type="Boolean" Nullable="false" />
+          <Property Name="lifeguard_exported" Type="Boolean" Nullable="false" />
+          <Property Name="statusID" Type="Int32" Nullable="false" />
+          <Property Name="membership_plan" Type="Int32" Nullable="false" />
+          <Property Name="newmember" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="referer" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbPoolStatu">
+          <Key>
+            <PropertyRef Name="PoolStatusID" />
+          </Key>
+          <Property Name="PoolStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbPreviousManagementCompany">
+          <Key>
+            <PropertyRef Name="PreviousManagementCompanyId" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="PreviousManagementCompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="InsertBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InsertTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbClient" Relationship="Self.fk_tbPreviousManagementCompany_tbClients" FromRole="tbPreviousManagementCompany" ToRole="tbClients" />
+        </EntityType>
+        <EntityType Name="tbRegion">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbServiceType">
+          <Key>
+            <PropertyRef Name="ServiceTypeID" />
+          </Key>
+          <Property Name="ServiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="datecreated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbClientContracts" Relationship="Self.fk_tbClientContracts_tbServiceType" FromRole="tbServiceType" ToRole="tbClientContracts" />
+        </EntityType>
+        <EntityType Name="tbState">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="abr" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbClientContracts" Relationship="Self.fk_tbClientContracts_tbStates" FromRole="tbStates" ToRole="tbClientContracts" />
+        </EntityType>
+        <EntityType Name="tbTimeDetail">
+          <Key>
+            <PropertyRef Name="TimeDetailId" />
+          </Key>
+          <Property Name="TimeDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Original_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PMID" Type="Int32" Nullable="false" />
+          <Property Name="Mgr_Time_In" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Mgr_Time_Out" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Mgr_Time_Mtg" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_CSS_Tickets" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Calls" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Total_Call_Time" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="tbClient" Relationship="Self.fk_tbTimeDetail_tbClients" FromRole="tbTimeDetail" ToRole="tbClients" />
+        </EntityType>
+        <EntityType Name="Time_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Association_ID" Type="Int32" />
+          <Property Name="Event_Date" Type="DateTime" Precision="3" />
+          <Property Name="Mgr_Name" Type="Int32" />
+          <Property Name="Mgr_Time_In" Type="Double" />
+          <Property Name="Mgr_Time_out" Type="Double" />
+          <Property Name="Mgr_Time_Mtg" Type="Double" />
+          <Property Name="Total_Css_Tickets" Type="Int32" />
+          <Property Name="Total_Calls" Type="Int32" />
+          <Property Name="Total_Call_Time" Type="Double" />
+          <Property Name="upsize_ts" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="pool_passes">
+          <Key>
+            <PropertyRef Name="Previous_Member" />
+          </Key>
+          <Property Name="Member_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Member_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CityStateZip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Neighborhood" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Member_Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Member_Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Application_Mailed_2009" Type="DateTime" Precision="3" />
+          <Property Name="Renewal_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Number_of_Passess_Issued_2009" Type="Double" />
+          <Property Name="Pass_Assignees_2009" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Previous_Member" Type="Boolean" Nullable="false" />
+          <Property Name="Notes_2009" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Amount_Paid_2009" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Date_Paid_2009" Type="DateTime" Precision="3" />
+          <Property Name="Item_Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="StorageEdgeLocation">
+          <Key>
+            <PropertyRef Name="ScopeId" />
+            <PropertyRef Name="Location" />
+            <PropertyRef Name="Tier" />
+            <PropertyRef Name="BlobCount" />
+            <PropertyRef Name="TimeStamp" />
+          </Key>
+          <Property Name="ScopeId" Type="Guid" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tier" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BlobCount" Type="Int64" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbClientContract">
+          <Key>
+            <PropertyRef Name="ContractsID" />
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ContractsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="ActiveContract" Type="Boolean" />
+          <Property Name="ServiceTypeID" Type="Int32" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="Initial_Term_Years" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CAM_Contract" Type="Boolean" />
+          <Property Name="Contract_Version" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Signed" Type="DateTime" Precision="3" />
+          <Property Name="GoLiveDate" Type="DateTime" Precision="3" />
+          <Property Name="NoUnits" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Original_Contract_Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Startup_Fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CPI" Type="Boolean" />
+          <Property Name="CurrentContractAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Late_Fee_Percent" Type="Double" />
+          <Property Name="BasicWebsite" Type="Boolean" />
+          <Property Name="CustomWebsite" Type="Boolean" />
+          <Property Name="eManageLogins" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="CollectionAgencyResolution" Type="Boolean" />
+          <Property Name="Inspections" Type="Boolean" />
+          <Property Name="NumberOfInspections" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="WalkingInspections" Type="Boolean" />
+          <Property Name="PMHours" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="AnnualMeeting" Type="Boolean" />
+          <Property Name="Number_BOD_Meetings" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="PoolMemberships" Type="Boolean" />
+          <Property Name="ClubhouseRentals" Type="Boolean" />
+          <Property Name="LeaseAdmin" Type="Boolean" />
+          <Property Name="MovingService" Type="Boolean" />
+          <Property Name="GateProgramming" Type="Boolean" />
+          <Property Name="ContractNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PMCommission" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="InsertBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InsertTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbClient" Relationship="Self.fk_tbClientContracts_tbClients" FromRole="tbClientContracts" ToRole="tbClients" />
+          <NavigationProperty Name="tbServiceType" Relationship="Self.fk_tbClientContracts_tbServiceType" FromRole="tbClientContracts" ToRole="tbServiceType" />
+          <NavigationProperty Name="tbState" Relationship="Self.fk_tbClientContracts_tbStates" FromRole="tbClientContracts" ToRole="tbStates" />
+        </EntityType>
+        <EntityType Name="tbClientPool">
+          <Key>
+            <PropertyRef Name="ClientPoolId" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="Allow_Outside_Pool" />
+          </Key>
+          <Property Name="ClientPoolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="Allow_Outside_Pool" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPoolPasses_">
+          <Key>
+            <PropertyRef Name="previous_member" />
+          </Key>
+          <Property Name="familyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="previous_member" Type="Boolean" Nullable="false" />
+          <Property Name="emergency_phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="csz" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="renewal_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cal_year" Type="Double" />
+          <Property Name="clientID" Type="Double" />
+        </EntityType>
+        <EntityType Name="tbProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Product_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AddendumSubID" Type="Int32" />
+          <Property Name="Commission" Type="Double" />
+          <Property Name="Commission_Salaried" Type="Boolean" />
+          <Property Name="CAMGL" Type="String" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Name="AGL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AutoBill" Type="Boolean" />
+          <Property Name="Active" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tbAddendumSubType" Relationship="Self.fk_tbProducts_tbAddendumSubType" FromRole="tbProducts" ToRole="tbAddendumSubType" />
+        </EntityType>
+        <Association Name="fk_tbAddendumSubType_tbAddendum">
+          <End Role="tbAddendum" Type="Self.tbAddendum" Multiplicity="0..1" />
+          <End Role="tbAddendumSubType" Type="Self.tbAddendumSubType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAddendum">
+              <PropertyRef Name="AddendumID" />
+            </Principal>
+            <Dependent Role="tbAddendumSubType">
+              <PropertyRef Name="AddendumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbProducts_tbAddendumSubType">
+          <End Role="tbAddendumSubType" Type="Self.tbAddendumSubType" Multiplicity="0..1" />
+          <End Role="tbProducts" Type="Self.tbProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAddendumSubType">
+              <PropertyRef Name="AddendumSubID" />
+            </Principal>
+            <Dependent Role="tbProducts">
+              <PropertyRef Name="AddendumSubID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbBillingData_tbAssessmentType">
+          <End Role="tbAssessmentType" Type="Self.tbAssessmentType" Multiplicity="0..1" />
+          <End Role="tbBillingData" Type="Self.tbBillingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAssessmentType">
+              <PropertyRef Name="AssessmentTypeId" />
+            </Principal>
+            <Dependent Role="tbBillingData">
+              <PropertyRef Name="AssessmentTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbBillingData_tbBillingFrequency">
+          <End Role="tbBillingFrequency" Type="Self.tbBillingFrequency" Multiplicity="0..1" />
+          <End Role="tbBillingData" Type="Self.tbBillingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBillingFrequency">
+              <PropertyRef Name="tbBillingFrequencyId" />
+            </Principal>
+            <Dependent Role="tbBillingData">
+              <PropertyRef Name="BillingFrequencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbBillingData_tbClients">
+          <End Role="tbClients" Type="Self.tbClient" Multiplicity="1" />
+          <End Role="tbBillingData" Type="Self.tbBillingData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbBillingData">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientManagementData_tbClients">
+          <End Role="tbClients" Type="Self.tbClient" Multiplicity="1" />
+          <End Role="tbClientManagementData" Type="Self.tbClientManagementData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbClientManagementData">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembership_tbClientPoolFees">
+          <End Role="tbClientPoolFees" Type="Self.tbClientPoolFee" Multiplicity="0..1" />
+          <End Role="tbMembership" Type="Self.tbMembership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClientPoolFees">
+              <PropertyRef Name="ClientPoolFeesID" />
+            </Principal>
+            <Dependent Role="tbMembership">
+              <PropertyRef Name="membership_plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientContracts_tbClients">
+          <End Role="tbClients" Type="Self.tbClient" Multiplicity="1" />
+          <End Role="tbClientContracts" Type="Self.tbClientContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbClientContracts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembers_tbClients">
+          <End Role="tbClients" Type="Self.tbClient" Multiplicity="0..1" />
+          <End Role="tbMembers" Type="Self.tbMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbMembers">
+              <PropertyRef Name="clientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbNewManagementCompany_tbClients">
+          <End Role="tbClients" Type="Self.tbClient" Multiplicity="1" />
+          <End Role="tbNewManagementCompany" Type="Self.tbNewManagementCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbNewManagementCompany">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbPreviousManagementCompany_tbClients">
+          <End Role="tbClients" Type="Self.tbClient" Multiplicity="1" />
+          <End Role="tbPreviousManagementCompany" Type="Self.tbPreviousManagementCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbPreviousManagementCompany">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbTimeDetail_tbClients">
+          <End Role="tbClients" Type="Self.tbClient" Multiplicity="1" />
+          <End Role="tbTimeDetail" Type="Self.tbTimeDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbClients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="tbTimeDetail">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembership_tbMembers">
+          <End Role="tbMembers" Type="Self.tbMember" Multiplicity="1" />
+          <End Role="tbMembership" Type="Self.tbMembership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMembers">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="tbMembership">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMembershipLog_tbMembership">
+          <End Role="tbMembership" Type="Self.tbMembership" Multiplicity="1" />
+          <End Role="tbMembershipLog" Type="Self.tbMembershipLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbMembership">
+              <PropertyRef Name="MembershipID" />
+            </Principal>
+            <Dependent Role="tbMembershipLog">
+              <PropertyRef Name="MembershipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientContracts_tbServiceType">
+          <End Role="tbServiceType" Type="Self.tbServiceType" Multiplicity="0..1" />
+          <End Role="tbClientContracts" Type="Self.tbClientContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbServiceType">
+              <PropertyRef Name="ServiceTypeID" />
+            </Principal>
+            <Dependent Role="tbClientContracts">
+              <PropertyRef Name="ServiceTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tbClientContracts_tbStates">
+          <End Role="tbStates" Type="Self.tbState" Multiplicity="0..1" />
+          <End Role="tbClientContracts" Type="Self.tbClientContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbClientContracts">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CAMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dtproperties" EntityType="Self.dtproperty" />
+          <EntitySet Name="HarvestTimeTrackings" EntityType="Self.HarvestTimeTracking" />
+          <EntitySet Name="StorageEdgeBlobs" EntityType="Self.StorageEdgeBlob" />
+          <EntitySet Name="StorageEdgeEncryptionProviders" EntityType="Self.StorageEdgeEncryptionProvider" />
+          <EntitySet Name="StorageEdgeStorageProviders" EntityType="Self.StorageEdgeStorageProvider" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tbAddendums" EntityType="Self.tbAddendum" />
+          <EntitySet Name="tbAddendumSubTypes" EntityType="Self.tbAddendumSubType" />
+          <EntitySet Name="tbAssessmentTypes" EntityType="Self.tbAssessmentType" />
+          <EntitySet Name="tbBillingDatas" EntityType="Self.tbBillingData" />
+          <EntitySet Name="tbBillingFrequencies" EntityType="Self.tbBillingFrequency" />
+          <EntitySet Name="tbClientManagementDatas" EntityType="Self.tbClientManagementData" />
+          <EntitySet Name="tbClientPIs" EntityType="Self.tbClientPI" />
+          <EntitySet Name="tbClientPMs" EntityType="Self.tbClientPM" />
+          <EntitySet Name="tbClientPoolFees" EntityType="Self.tbClientPoolFee" />
+          <EntitySet Name="tbClientRelations" EntityType="Self.tbClientRelation" />
+          <EntitySet Name="tbClients" EntityType="Self.tbClient" />
+          <EntitySet Name="tbExpenseBatches" EntityType="Self.tbExpenseBatch" />
+          <EntitySet Name="tbExpenseItems" EntityType="Self.tbExpenseItem" />
+          <EntitySet Name="tbMembers" EntityType="Self.tbMember" />
+          <EntitySet Name="tbMemberships" EntityType="Self.tbMembership" />
+          <EntitySet Name="tbMembershipLogs" EntityType="Self.tbMembershipLog" />
+          <EntitySet Name="tbNewManagementCompanies" EntityType="Self.tbNewManagementCompany" />
+          <EntitySet Name="tbPIs" EntityType="Self.tbPI" />
+          <EntitySet Name="tbPMs" EntityType="Self.tbPM" />
+          <EntitySet Name="tbPoolMembers" EntityType="Self.tbPoolMember" />
+          <EntitySet Name="tbPoolStatus" EntityType="Self.tbPoolStatu" />
+          <EntitySet Name="tbPreviousManagementCompanies" EntityType="Self.tbPreviousManagementCompany" />
+          <EntitySet Name="tbRegions" EntityType="Self.tbRegion" />
+          <EntitySet Name="tbServiceTypes" EntityType="Self.tbServiceType" />
+          <EntitySet Name="tbStates" EntityType="Self.tbState" />
+          <EntitySet Name="tbTimeDetails" EntityType="Self.tbTimeDetail" />
+          <EntitySet Name="Time_Detail" EntityType="Self.Time_Detail" />
+          <EntitySet Name="pool_passes" EntityType="Self.pool_passes" />
+          <EntitySet Name="StorageEdgeLocations" EntityType="Self.StorageEdgeLocation" />
+          <EntitySet Name="tbClientContracts" EntityType="Self.tbClientContract" />
+          <EntitySet Name="tbClientPools" EntityType="Self.tbClientPool" />
+          <EntitySet Name="tbPoolPasses_" EntityType="Self.tbPoolPasses_" />
+          <EntitySet Name="tbProducts" EntityType="Self.tbProduct" />
+          <AssociationSet Name="fk_tbAddendumSubType_tbAddendum" Association="Self.fk_tbAddendumSubType_tbAddendum">
+            <End Role="tbAddendum" EntitySet="tbAddendums" />
+            <End Role="tbAddendumSubType" EntitySet="tbAddendumSubTypes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbProducts_tbAddendumSubType" Association="Self.fk_tbProducts_tbAddendumSubType">
+            <End Role="tbAddendumSubType" EntitySet="tbAddendumSubTypes" />
+            <End Role="tbProducts" EntitySet="tbProducts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbBillingData_tbAssessmentType" Association="Self.fk_tbBillingData_tbAssessmentType">
+            <End Role="tbAssessmentType" EntitySet="tbAssessmentTypes" />
+            <End Role="tbBillingData" EntitySet="tbBillingDatas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbBillingData_tbBillingFrequency" Association="Self.fk_tbBillingData_tbBillingFrequency">
+            <End Role="tbBillingFrequency" EntitySet="tbBillingFrequencies" />
+            <End Role="tbBillingData" EntitySet="tbBillingDatas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbBillingData_tbClients" Association="Self.fk_tbBillingData_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbBillingData" EntitySet="tbBillingDatas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientManagementData_tbClients" Association="Self.fk_tbClientManagementData_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbClientManagementData" EntitySet="tbClientManagementDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembership_tbClientPoolFees" Association="Self.FK_tbMembership_tbClientPoolFees">
+            <End Role="tbClientPoolFees" EntitySet="tbClientPoolFees" />
+            <End Role="tbMembership" EntitySet="tbMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientContracts_tbClients" Association="Self.fk_tbClientContracts_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbClientContracts" EntitySet="tbClientContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembers_tbClients" Association="Self.FK_tbMembers_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbMembers" EntitySet="tbMembers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbNewManagementCompany_tbClients" Association="Self.fk_tbNewManagementCompany_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbNewManagementCompany" EntitySet="tbNewManagementCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbPreviousManagementCompany_tbClients" Association="Self.fk_tbPreviousManagementCompany_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbPreviousManagementCompany" EntitySet="tbPreviousManagementCompanies" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbTimeDetail_tbClients" Association="Self.fk_tbTimeDetail_tbClients">
+            <End Role="tbClients" EntitySet="tbClients" />
+            <End Role="tbTimeDetail" EntitySet="tbTimeDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembership_tbMembers" Association="Self.FK_tbMembership_tbMembers">
+            <End Role="tbMembers" EntitySet="tbMembers" />
+            <End Role="tbMembership" EntitySet="tbMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMembershipLog_tbMembership" Association="Self.FK_tbMembershipLog_tbMembership">
+            <End Role="tbMembership" EntitySet="tbMemberships" />
+            <End Role="tbMembershipLog" EntitySet="tbMembershipLogs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientContracts_tbServiceType" Association="Self.fk_tbClientContracts_tbServiceType">
+            <End Role="tbServiceType" EntitySet="tbServiceTypes" />
+            <End Role="tbClientContracts" EntitySet="tbClientContracts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tbClientContracts_tbStates" Association="Self.fk_tbClientContracts_tbStates">
+            <End Role="tbStates" EntitySet="tbStates" />
+            <End Role="tbClientContracts" EntitySet="tbClientContracts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CAMModelStoreContainer" CdmEntityContainer="CAMEntities">
+          <EntitySetMapping Name="dtproperties">
+            <EntityTypeMapping TypeName="CAMModel.dtproperty">
+              <MappingFragment StoreEntitySet="dtproperties">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="objectid" ColumnName="objectid" />
+                <ScalarProperty Name="property" ColumnName="property" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="uvalue" ColumnName="uvalue" />
+                <ScalarProperty Name="lvalue" ColumnName="lvalue" />
+                <ScalarProperty Name="version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HarvestTimeTrackings">
+            <EntityTypeMapping TypeName="CAMModel.HarvestTimeTracking">
+              <MappingFragment StoreEntitySet="HarvestTimeTracking">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Project" ColumnName="Project" />
+                <ScalarProperty Name="Project_Code" ColumnName="Project Code" />
+                <ScalarProperty Name="Task" ColumnName="Task" />
+                <ScalarProperty Name="First_name" ColumnName="First name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last name" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Hours_rounded" ColumnName="Hours rounded" />
+                <ScalarProperty Name="Invoiced" ColumnName="Invoiced" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Billable" ColumnName="Billable" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageEdgeBlobs">
+            <EntityTypeMapping TypeName="CAMModel.StorageEdgeBlob">
+              <MappingFragment StoreEntitySet="StorageEdgeBlobs">
+                <ScalarProperty Name="BlobId" ColumnName="BlobId" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="InRBS" ColumnName="InRBS" />
+                <ScalarProperty Name="BlobLocation" ColumnName="BlobLocation" />
+                <ScalarProperty Name="BlobFileName" ColumnName="BlobFileName" />
+                <ScalarProperty Name="FilterPending" ColumnName="FilterPending" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageEdgeEncryptionProviders">
+            <EntityTypeMapping TypeName="CAMModel.StorageEdgeEncryptionProvider">
+              <MappingFragment StoreEntitySet="StorageEdgeEncryptionProviders">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="EncryptionKey" ColumnName="EncryptionKey" />
+                <ScalarProperty Name="EncryptionKeySize" ColumnName="EncryptionKeySize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageEdgeStorageProviders">
+            <EntityTypeMapping TypeName="CAMModel.StorageEdgeStorageProvider">
+              <MappingFragment StoreEntitySet="StorageEdgeStorageProviders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ConnectionStringTitle" ColumnName="ConnectionStringTitle" />
+                <ScalarProperty Name="ConnectionStringExample" ColumnName="ConnectionStringExample" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CAMModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAddendums">
+            <EntityTypeMapping TypeName="CAMModel.tbAddendum">
+              <MappingFragment StoreEntitySet="tbAddendum">
+                <ScalarProperty Name="AddendumID" ColumnName="AddendumID" />
+                <ScalarProperty Name="Addendum_Description" ColumnName="Addendum_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAddendumSubTypes">
+            <EntityTypeMapping TypeName="CAMModel.tbAddendumSubType">
+              <MappingFragment StoreEntitySet="tbAddendumSubType">
+                <ScalarProperty Name="AddendumSubID" ColumnName="AddendumSubID" />
+                <ScalarProperty Name="AddendumID" ColumnName="AddendumID" />
+                <ScalarProperty Name="AddendumSub_Description" ColumnName="AddendumSub_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAssessmentTypes">
+            <EntityTypeMapping TypeName="CAMModel.tbAssessmentType">
+              <MappingFragment StoreEntitySet="tbAssessmentType">
+                <ScalarProperty Name="AssessmentTypeId" ColumnName="AssessmentTypeId" />
+                <ScalarProperty Name="AssessmentTypeName" ColumnName="AssessmentTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbBillingDatas">
+            <EntityTypeMapping TypeName="CAMModel.tbBillingData">
+              <MappingFragment StoreEntitySet="tbBillingData">
+                <ScalarProperty Name="BillingDataId" ColumnName="BillingDataId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="AssessmentYear" ColumnName="AssessmentYear" />
+                <ScalarProperty Name="AssessmentAmount" ColumnName="AssessmentAmount" />
+                <ScalarProperty Name="AssessmentTypeID" ColumnName="AssessmentTypeID" />
+                <ScalarProperty Name="BillingFrequencyID" ColumnName="BillingFrequencyID" />
+                <ScalarProperty Name="DueDates" ColumnName="DueDates" />
+                <ScalarProperty Name="BilledByCOS" ColumnName="BilledByCOS" />
+                <ScalarProperty Name="LateFee" ColumnName="LateFee" />
+                <ScalarProperty Name="LateDate" ColumnName="LateDate" />
+                <ScalarProperty Name="Interest" ColumnName="Interest" />
+                <ScalarProperty Name="SignedResolution" ColumnName="SignedResolution" />
+                <ScalarProperty Name="SetupinCinc" ColumnName="SetupinCinc" />
+                <ScalarProperty Name="BillingGenerated" ColumnName="BillingGenerated" />
+                <ScalarProperty Name="InsertBy" ColumnName="InsertBy" />
+                <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbBillingFrequencies">
+            <EntityTypeMapping TypeName="CAMModel.tbBillingFrequency">
+              <MappingFragment StoreEntitySet="tbBillingFrequency">
+                <ScalarProperty Name="tbBillingFrequencyId" ColumnName="tbBillingFrequencyId" />
+                <ScalarProperty Name="tbBillingFrequencyName" ColumnName="tbBillingFrequencyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientManagementDatas">
+            <EntityTypeMapping TypeName="CAMModel.tbClientManagementData">
+              <MappingFragment StoreEntitySet="tbClientManagementData">
+                <ScalarProperty Name="ClientManagementDataId" ColumnName="ClientManagementDataId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="AnnualMeetingMonth" ColumnName="AnnualMeetingMonth" />
+                <ScalarProperty Name="NoticeRequired" ColumnName="NoticeRequired" />
+                <ScalarProperty Name="QuorumRequired" ColumnName="QuorumRequired" />
+                <ScalarProperty Name="NoQuorumMetNewMtg" ColumnName="NoQuorumMetNewMtg" />
+                <ScalarProperty Name="QuorumNotMetNewMtgDate" ColumnName="QuorumNotMetNewMtgDate" />
+                <ScalarProperty Name="QuorumNotMetNewNotice" ColumnName="QuorumNotMetNewNotice" />
+                <ScalarProperty Name="QuorumNotMetNewQuorum" ColumnName="QuorumNotMetNewQuorum" />
+                <ScalarProperty Name="TotalBoardMembers" ColumnName="TotalBoardMembers" />
+                <ScalarProperty Name="StaggeredTerms" ColumnName="StaggeredTerms" />
+                <ScalarProperty Name="BudgetRatRequired" ColumnName="BudgetRatRequired" />
+                <ScalarProperty Name="InsertBy" ColumnName="InsertBy" />
+                <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientPIs">
+            <EntityTypeMapping TypeName="CAMModel.tbClientPI">
+              <MappingFragment StoreEntitySet="tbClientPI">
+                <ScalarProperty Name="Client_ID" ColumnName="Client_ID" />
+                <ScalarProperty Name="PI_ID" ColumnName="PI_ID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="Walking_Insp" ColumnName="Walking_Insp" />
+                <ScalarProperty Name="Checklist" ColumnName="Checklist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientPMs">
+            <EntityTypeMapping TypeName="CAMModel.tbClientPM">
+              <MappingFragment StoreEntitySet="tbClientPM">
+                <ScalarProperty Name="pmID" ColumnName="pmID" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="commission" ColumnName="commission" />
+                <ScalarProperty Name="datecreated" ColumnName="datecreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientPoolFees">
+            <EntityTypeMapping TypeName="CAMModel.tbClientPoolFee">
+              <MappingFragment StoreEntitySet="tbClientPoolFees">
+                <ScalarProperty Name="ClientPoolFeesID" ColumnName="ClientPoolFeesID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="Cal_Year" ColumnName="Cal_Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientRelations">
+            <EntityTypeMapping TypeName="CAMModel.tbClientRelation">
+              <MappingFragment StoreEntitySet="tbClientRelation">
+                <ScalarProperty Name="RelationID" ColumnName="RelationID" />
+                <ScalarProperty Name="Relation_Description" ColumnName="Relation_Description" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="modifydate" ColumnName="modifydate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClients">
+            <EntityTypeMapping TypeName="CAMModel.tbClient">
+              <MappingFragment StoreEntitySet="tbClients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Client_Name" ColumnName="Client_Name" />
+                <ScalarProperty Name="website_url" ColumnName="website_url" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Fed_tax_id" ColumnName="Fed_tax_id" />
+                <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="Date_To_New_Mngmnt" ColumnName="Date_To_New_Mngmnt" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Insertby" ColumnName="Insertby" />
+                <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+                <ScalarProperty Name="PMID" ColumnName="PMID" />
+                <ScalarProperty Name="PIID" ColumnName="PIID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbExpenseBatches">
+            <EntityTypeMapping TypeName="CAMModel.tbExpenseBatch">
+              <MappingFragment StoreEntitySet="tbExpenseBatch">
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="BatchDate" ColumnName="BatchDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbExpenseItems">
+            <EntityTypeMapping TypeName="CAMModel.tbExpenseItem">
+              <MappingFragment StoreEntitySet="tbExpenseItem">
+                <ScalarProperty Name="InvoiceItemID" ColumnName="InvoiceItemID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Extended_Price" ColumnName="Extended_Price" />
+                <ScalarProperty Name="invoicedate" ColumnName="invoicedate" />
+                <ScalarProperty Name="Exported" ColumnName="Exported" />
+                <ScalarProperty Name="Exported_On" ColumnName="Exported_On" />
+                <ScalarProperty Name="logon_user" ColumnName="logon_user" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbMembers">
+            <EntityTypeMapping TypeName="CAMModel.tbMember">
+              <MappingFragment StoreEntitySet="tbMembers">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="emergency_phone" ColumnName="emergency_phone" />
+                <ScalarProperty Name="emergency_contact" ColumnName="emergency_contact" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="csz" ColumnName="csz" />
+                <ScalarProperty Name="neighborhood" ColumnName="neighborhood" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="referer" ColumnName="referer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbMemberships">
+            <EntityTypeMapping TypeName="CAMModel.tbMembership">
+              <MappingFragment StoreEntitySet="tbMembership">
+                <ScalarProperty Name="MembershipID" ColumnName="MembershipID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="cal_year" ColumnName="cal_year" />
+                <ScalarProperty Name="adult1" ColumnName="adult1" />
+                <ScalarProperty Name="adult2" ColumnName="adult2" />
+                <ScalarProperty Name="child1" ColumnName="child1" />
+                <ScalarProperty Name="child2" ColumnName="child2" />
+                <ScalarProperty Name="child3" ColumnName="child3" />
+                <ScalarProperty Name="child4" ColumnName="child4" />
+                <ScalarProperty Name="child5" ColumnName="child5" />
+                <ScalarProperty Name="amount_paid" ColumnName="amount_paid" />
+                <ScalarProperty Name="date_paid" ColumnName="date_paid" />
+                <ScalarProperty Name="check_no" ColumnName="check_no" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="num_passes" ColumnName="num_passes" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="membership_plan" ColumnName="membership_plan" />
+                <ScalarProperty Name="PassNumber" ColumnName="PassNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbMembershipLogs">
+            <EntityTypeMapping TypeName="CAMModel.tbMembershipLog">
+              <MappingFragment StoreEntitySet="tbMembershipLog">
+                <ScalarProperty Name="MembershipID" ColumnName="MembershipID" />
+                <ScalarProperty Name="pooltag_appln_rcvd" ColumnName="pooltag_appln_rcvd" />
+                <ScalarProperty Name="indem_waiver_rcvd" ColumnName="indem_waiver_rcvd" />
+                <ScalarProperty Name="appln_mailed" ColumnName="appln_mailed" />
+                <ScalarProperty Name="mail_merge_exported" ColumnName="mail_merge_exported" />
+                <ScalarProperty Name="lifeguard_exported" ColumnName="lifeguard_exported" />
+                <ScalarProperty Name="PassMailed" ColumnName="PassMailed" />
+                <ScalarProperty Name="AssociationMember" ColumnName="AssociationMember" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbNewManagementCompanies">
+            <EntityTypeMapping TypeName="CAMModel.tbNewManagementCompany">
+              <MappingFragment StoreEntitySet="tbNewManagementCompany">
+                <ScalarProperty Name="NewManagementCompanyId" ColumnName="NewManagementCompanyId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="NewCompanyName" ColumnName="NewCompanyName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="InsertBy" ColumnName="InsertBy" />
+                <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPIs">
+            <EntityTypeMapping TypeName="CAMModel.tbPI">
+              <MappingFragment StoreEntitySet="tbPI">
+                <ScalarProperty Name="PI_ID" ColumnName="PI_ID" />
+                <ScalarProperty Name="PI_Name" ColumnName="PI_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPMs">
+            <EntityTypeMapping TypeName="CAMModel.tbPM">
+              <MappingFragment StoreEntitySet="tbPM">
+                <ScalarProperty Name="PMID" ColumnName="PMID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="datecreated" ColumnName="datecreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPoolMembers">
+            <EntityTypeMapping TypeName="CAMModel.tbPoolMember">
+              <MappingFragment StoreEntitySet="tbPoolMembers">
+                <ScalarProperty Name="PoolMemberID" ColumnName="PoolMemberID" />
+                <ScalarProperty Name="familyname" ColumnName="familyname" />
+                <ScalarProperty Name="adult1" ColumnName="adult1" />
+                <ScalarProperty Name="adult2" ColumnName="adult2" />
+                <ScalarProperty Name="child1" ColumnName="child1" />
+                <ScalarProperty Name="child2" ColumnName="child2" />
+                <ScalarProperty Name="child3" ColumnName="child3" />
+                <ScalarProperty Name="child4" ColumnName="child4" />
+                <ScalarProperty Name="child5" ColumnName="child5" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="previous_member" ColumnName="previous_member" />
+                <ScalarProperty Name="emergency_phone" ColumnName="emergency_phone" />
+                <ScalarProperty Name="pooltag_appln_rcvd" ColumnName="pooltag_appln_rcvd" />
+                <ScalarProperty Name="indem_waiver_rcvd" ColumnName="indem_waiver_rcvd" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="csz" ColumnName="csz" />
+                <ScalarProperty Name="neighborhood" ColumnName="neighborhood" />
+                <ScalarProperty Name="prev_amount_paid" ColumnName="prev_amount_paid" />
+                <ScalarProperty Name="amount_paid" ColumnName="amount_paid" />
+                <ScalarProperty Name="date_paid" ColumnName="date_paid" />
+                <ScalarProperty Name="check_no" ColumnName="check_no" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="num_passes" ColumnName="num_passes" />
+                <ScalarProperty Name="cal_year" ColumnName="cal_year" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="appln_mailed" ColumnName="appln_mailed" />
+                <ScalarProperty Name="mail_merge_exported" ColumnName="mail_merge_exported" />
+                <ScalarProperty Name="lifeguard_exported" ColumnName="lifeguard_exported" />
+                <ScalarProperty Name="statusID" ColumnName="statusID" />
+                <ScalarProperty Name="membership_plan" ColumnName="membership_plan" />
+                <ScalarProperty Name="newmember" ColumnName="newmember" />
+                <ScalarProperty Name="referer" ColumnName="referer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPoolStatus">
+            <EntityTypeMapping TypeName="CAMModel.tbPoolStatu">
+              <MappingFragment StoreEntitySet="tbPoolStatus">
+                <ScalarProperty Name="PoolStatusID" ColumnName="PoolStatusID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPreviousManagementCompanies">
+            <EntityTypeMapping TypeName="CAMModel.tbPreviousManagementCompany">
+              <MappingFragment StoreEntitySet="tbPreviousManagementCompany">
+                <ScalarProperty Name="PreviousManagementCompanyId" ColumnName="PreviousManagementCompanyId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="InsertBy" ColumnName="InsertBy" />
+                <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRegions">
+            <EntityTypeMapping TypeName="CAMModel.tbRegion">
+              <MappingFragment StoreEntitySet="tbRegion">
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbServiceTypes">
+            <EntityTypeMapping TypeName="CAMModel.tbServiceType">
+              <MappingFragment StoreEntitySet="tbServiceType">
+                <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+                <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="datecreated" ColumnName="datecreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbStates">
+            <EntityTypeMapping TypeName="CAMModel.tbState">
+              <MappingFragment StoreEntitySet="tbStates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="abr" ColumnName="abr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbTimeDetails">
+            <EntityTypeMapping TypeName="CAMModel.tbTimeDetail">
+              <MappingFragment StoreEntitySet="tbTimeDetail">
+                <ScalarProperty Name="TimeDetailId" ColumnName="TimeDetailId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Original_Date" ColumnName="Original_Date" />
+                <ScalarProperty Name="PMID" ColumnName="PMID" />
+                <ScalarProperty Name="Mgr_Time_In" ColumnName="Mgr_Time_In" />
+                <ScalarProperty Name="Mgr_Time_Out" ColumnName="Mgr_Time_Out" />
+                <ScalarProperty Name="Mgr_Time_Mtg" ColumnName="Mgr_Time_Mtg" />
+                <ScalarProperty Name="Total_CSS_Tickets" ColumnName="Total_CSS_Tickets" />
+                <ScalarProperty Name="Total_Calls" ColumnName="Total_Calls" />
+                <ScalarProperty Name="Total_Call_Time" ColumnName="Total_Call_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Time_Detail">
+            <EntityTypeMapping TypeName="CAMModel.Time_Detail">
+              <MappingFragment StoreEntitySet="Time_Detail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Association_ID" ColumnName="Association_ID" />
+                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
+                <ScalarProperty Name="Mgr_Name" ColumnName="Mgr_Name" />
+                <ScalarProperty Name="Mgr_Time_In" ColumnName="Mgr_Time_In" />
+                <ScalarProperty Name="Mgr_Time_out" ColumnName="Mgr_Time_out" />
+                <ScalarProperty Name="Mgr_Time_Mtg" ColumnName="Mgr_Time_Mtg" />
+                <ScalarProperty Name="Total_Css_Tickets" ColumnName="Total_Css_Tickets" />
+                <ScalarProperty Name="Total_Calls" ColumnName="Total_Calls" />
+                <ScalarProperty Name="Total_Call_Time" ColumnName="Total_Call_Time" />
+                <ScalarProperty Name="upsize_ts" ColumnName="upsize_ts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pool_passes">
+            <EntityTypeMapping TypeName="CAMModel.pool_passes">
+              <MappingFragment StoreEntitySet="pool_passes">
+                <ScalarProperty Name="Member_Name" ColumnName="Member Name" />
+                <ScalarProperty Name="Member_Address" ColumnName="Member Address" />
+                <ScalarProperty Name="CityStateZip" ColumnName="CityStateZip" />
+                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+                <ScalarProperty Name="Member_Email" ColumnName="Member Email" />
+                <ScalarProperty Name="Member_Phone" ColumnName="Member Phone" />
+                <ScalarProperty Name="Date_Application_Mailed_2009" ColumnName="Date Application Mailed 2009" />
+                <ScalarProperty Name="Renewal_Price" ColumnName="Renewal Price" />
+                <ScalarProperty Name="Number_of_Passess_Issued_2009" ColumnName="Number of Passess Issued 2009" />
+                <ScalarProperty Name="Pass_Assignees_2009" ColumnName="Pass Assignees 2009" />
+                <ScalarProperty Name="Previous_Member" ColumnName="Previous Member" />
+                <ScalarProperty Name="Notes_2009" ColumnName="Notes 2009" />
+                <ScalarProperty Name="Amount_Paid_2009" ColumnName="Amount Paid 2009" />
+                <ScalarProperty Name="Date_Paid_2009" ColumnName="Date Paid 2009" />
+                <ScalarProperty Name="Item_Type" ColumnName="Item Type" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StorageEdgeLocations">
+            <EntityTypeMapping TypeName="CAMModel.StorageEdgeLocation">
+              <MappingFragment StoreEntitySet="StorageEdgeLocations">
+                <ScalarProperty Name="ScopeId" ColumnName="ScopeId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="BlobCount" ColumnName="BlobCount" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientContracts">
+            <EntityTypeMapping TypeName="CAMModel.tbClientContract">
+              <MappingFragment StoreEntitySet="tbClientContracts">
+                <ScalarProperty Name="ContractsID" ColumnName="ContractsID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ActiveContract" ColumnName="ActiveContract" />
+                <ScalarProperty Name="ServiceTypeID" ColumnName="ServiceTypeID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="Initial_Term_Years" ColumnName="Initial_Term_Years" />
+                <ScalarProperty Name="CAM_Contract" ColumnName="CAM_Contract" />
+                <ScalarProperty Name="Contract_Version" ColumnName="Contract_Version" />
+                <ScalarProperty Name="Date_Signed" ColumnName="Date_Signed" />
+                <ScalarProperty Name="GoLiveDate" ColumnName="GoLiveDate" />
+                <ScalarProperty Name="NoUnits" ColumnName="NoUnits" />
+                <ScalarProperty Name="Original_Contract_Amount" ColumnName="Original_Contract_Amount" />
+                <ScalarProperty Name="Startup_Fee" ColumnName="Startup_Fee" />
+                <ScalarProperty Name="CPI" ColumnName="CPI" />
+                <ScalarProperty Name="CurrentContractAmount" ColumnName="CurrentContractAmount" />
+                <ScalarProperty Name="Late_Fee_Percent" ColumnName="Late_Fee_Percent" />
+                <ScalarProperty Name="BasicWebsite" ColumnName="BasicWebsite" />
+                <ScalarProperty Name="CustomWebsite" ColumnName="CustomWebsite" />
+                <ScalarProperty Name="eManageLogins" ColumnName="eManageLogins" />
+                <ScalarProperty Name="CollectionAgencyResolution" ColumnName="CollectionAgencyResolution" />
+                <ScalarProperty Name="Inspections" ColumnName="Inspections" />
+                <ScalarProperty Name="NumberOfInspections" ColumnName="NumberOfInspections" />
+                <ScalarProperty Name="WalkingInspections" ColumnName="WalkingInspections" />
+                <ScalarProperty Name="PMHours" ColumnName="PMHours" />
+                <ScalarProperty Name="AnnualMeeting" ColumnName="AnnualMeeting" />
+                <ScalarProperty Name="Number_BOD_Meetings" ColumnName="Number_BOD_Meetings" />
+                <ScalarProperty Name="PoolMemberships" ColumnName="PoolMemberships" />
+                <ScalarProperty Name="ClubhouseRentals" ColumnName="ClubhouseRentals" />
+                <ScalarProperty Name="LeaseAdmin" ColumnName="LeaseAdmin" />
+                <ScalarProperty Name="MovingService" ColumnName="MovingService" />
+                <ScalarProperty Name="GateProgramming" ColumnName="GateProgramming" />
+                <ScalarProperty Name="ContractNotes" ColumnName="ContractNotes" />
+                <ScalarProperty Name="PMCommission" ColumnName="PMCommission" />
+                <ScalarProperty Name="InsertBy" ColumnName="InsertBy" />
+                <ScalarProperty Name="InsertTime" ColumnName="InsertTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbClientPools">
+            <EntityTypeMapping TypeName="CAMModel.tbClientPool">
+              <MappingFragment StoreEntitySet="tbClientPool">
+                <ScalarProperty Name="ClientPoolId" ColumnName="ClientPoolId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Allow_Outside_Pool" ColumnName="Allow_Outside_Pool" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPoolPasses_">
+            <EntityTypeMapping TypeName="CAMModel.tbPoolPasses_">
+              <MappingFragment StoreEntitySet="tbPoolPasses$">
+                <ScalarProperty Name="familyname" ColumnName="familyname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="previous_member" ColumnName="previous_member" />
+                <ScalarProperty Name="emergency_phone" ColumnName="emergency_phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="csz" ColumnName="csz" />
+                <ScalarProperty Name="renewal_price" ColumnName="renewal_price" />
+                <ScalarProperty Name="cal_year" ColumnName="cal_year" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbProducts">
+            <EntityTypeMapping TypeName="CAMModel.tbProduct">
+              <MappingFragment StoreEntitySet="tbProducts">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Product_Description" ColumnName="Product_Description" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="AddendumSubID" ColumnName="AddendumSubID" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="Commission_Salaried" ColumnName="Commission_Salaried" />
+                <ScalarProperty Name="CAMGL" ColumnName="CAMGL" />
+                <ScalarProperty Name="AGL" ColumnName="AGL" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="AutoBill" ColumnName="AutoBill" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

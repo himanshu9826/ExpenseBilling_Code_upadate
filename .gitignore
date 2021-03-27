@@ -3,3 +3,11 @@
 ################################################################################
 
 /CINC.BAL/bin
+/CINC.BAL/obj/Debug
+/CINC.Common/bin
+/CINC.Common/obj/Debug
+/CINC.DAL/bin
+/CINC.DAL/obj/Debug
+/CINC.Web/bin
+/CINC.Web/obj/Debug
+/packages

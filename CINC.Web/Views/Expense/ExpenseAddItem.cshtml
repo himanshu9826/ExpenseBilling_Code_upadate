@@ -1,0 +1,1375 @@
+﻿@model CINC.DataContract.ExpenseDataContract
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>CAM : Expense Billing</title>
+    <meta name="GENERATOR" content="Microsoft Visual Studio .NET 7.1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+		function gotoAddNew() {
+			window.location.href = 'HOANew.asp';
+		}
+    </script>
+</head>
+<body>
+
+    <header id="header--global">
+        <div id="header__item--secondary">
+            <div class="container--grid wrap--base push--center">
+                <div id="item--social-links">
+                    <a href="#" target="_blank">
+                        <img src="~/Content/img/fb.svg" />
+                    </a>
+                    <a href="#" target="_blank">
+                        <img src="~/Content/img/twitter.svg" />
+                    </a>
+                    <a href="#" target="_blank">
+                        <img src="~/Content/img/linkedin.svg" />
+                    </a>
+                </div>
+                <div id="item--cta">
+                    <p class="text--small text-color__white mb--0">
+                        Learn more about our management packages today — <br class="hide--large" /><strong><a href="#">Call toll free 9876543210</a></strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="header__item--primary">
+            <div class="container">
+                <div id="item--nav" class="text-center">
+                    <a href="#" id="logo-sec" class="navbar-brand"><img src="~/Content/img/logo.png" /></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    @*<form name="aspnetForm" method="post"
+          action="https://expense.communityassociationmanagement.com/ExpenseItemEntry.aspx"
+          onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">*@
+        <div>
+
+
+        </div>
+
+
+
+        <div id="content_wrap">
+            <div id="wrapper">
+                <div id="header">
+                    <span id="ctl00_ContentHeader_lblPageHeader"
+                          style="font-family:Verdana;font-size:16px;font-weight:bold;">Add Expense Item</span>
+                </div>
+                <div class="mainsec">
+                    <div id="sidebar">
+                        <p>
+                            <a href="https://expense.communityassociationmanagement.com/default.asp" target="_self">
+                                <img src="~/Content/img/btnHome.png" border="0" />
+                            </a>
+                        </p>
+                        <h1>Instructions:</h1>
+                        <p>
+                            The upper portion of this web-form allows you to enter a "New Expense Item".
+                        </p>
+                        <p>
+                            Fill-out the required fields and press "Save &amp; New" to save the record and reset
+                            the form to recieve a new record.
+                        </p>
+                        <p>
+                            After 1 or more records are added, a copy of the entry(s) will be displayed below
+                            the main form. You can "DELETE" a record(s) by checking the "Delete" checkbox and
+                            then click on the button labeled "Update" at the top of the display form.
+                        </p>
+                        <p>
+                            You may also use the filter form to find records previously entered in the month,
+                            though these will not be able to be deleted.
+                        </p>
+
+                    </div>
+                    <div id="content">
+
+                        <div id="ctl00_ContentPlaceHolder1_upnlEntryForm" width="100%">
+
+
+                            <div id="ctl00_ContentPlaceHolder1_pnlEntryForm"
+                                 style="width: 90%; text-align: center; border-radius: 8px; border: 1px solid steelblue;">
+                   
+                                            @using (Html.BeginForm("ExpenseAddItem", "Expense", FormMethod.Post, new { enctype = "multipart/form-data", @id = "Expenseform", @class = "form-horizontal", autocomplete = "off" }))
+                                            {
+                                                @Html.HiddenFor(m => m.InvoiceItemID, new { id = "hdnInvoiceItemID" })
+                                                @Html.HiddenFor(m => m.date_created)
+                                                @Html.HiddenFor(m => m.Exported_On)
+                                                @Html.HiddenFor(m => m.Exported)
+                                                @Html.HiddenFor(m => m.logon_user)
+                                                @Html.HiddenFor(m => m.BatchID)
+                                                <table width="95%" cellpadding="1" cellspacing="1">
+                                                    <tr>
+                                                        <td align='left'>
+                                                            <strong>Association</strong>
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td colspan="3" align="left">
+                                                            Products
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        @*<td align="left">
+                                                            @*<asp:DropDownList ID="ddlHOAList" TabIndex="1" runat="server" DataTextField="Client_Name" DataValueField="ClientID" />*@
+                                                        @*@Html.DropDownListFor(m => m.ClientID, new SelectList(Model.ClientList, "Value", "Text", 1), new { @class = "form-control", id = "ddlClient" })
+                                                            @Html.ValidationMessageFor(m => m.ClientID, "", new { @class = "text-danger" })*@
+
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align="left" colspan="3">
+                                                            @*<asp:DropDownList ID="ddlProducts" TabIndex="2" runat="server" DataTextField="Product_Description"
+                                                                DataValueField="ProductID" AutoPostBack="true" />*@
+                                                            @Html.DropDownListFor(Model => Model.ProductID, new SelectList(Model.ProductList, "Value", "Text", 1), new { @class = "form-control", id = "ddlProduct" })
+                                                            @Html.ValidationMessageFor(m => m.ProductID, "", new { @class = "text-danger" })
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align='left'>
+                                                            <strong>Date</strong>
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align="left">
+                                                            QTY
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align="left">
+                                                            Unit Price
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align='left'>
+                                                            @*<asp:TextBox runat="server" TabIndex="3" MaxLength="15" ID="txtDate" ControlToValidate="txtDate" />
+                                                                <asp:RangeValidator ID="RangeValidator3" runat="server" ErrorMessage="Must Be a Date"
+                                                                                    Display="Dynamic" ValidationGroup="EntryForm" ControlToValidate="txtDate" Type="Date"
+                                                                                    MaximumValue="12/31/2099" MinimumValue="1/1/1900"></asp:RangeValidator>*@
+                                                            @Html.TextBoxFor(model => model.invoicedate_string, "{0:dd/MM/yyyy}", new { id = "txtDate", @class = "form-control datepicker", @placeholder = " Date" })
+                                                            @Html.ValidationMessageFor(model => model.invoicedate_string)
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align="left">
+                                                            @Html.TextBoxFor(m => m.Quantity, new { id = "txtQTY", autocomplete = "off", @class = "form-control" })
+                                                            <lable id="validQty"></lable>
+                                                            @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+
+
+
+
+                                                            @*<asp:TextBox ID="txtQTY" TabIndex="4" type="number" runat="server" Width="100px" MaxLength="10" AutoPostBack="true"
+                                                                             Text="0" />
+                                                                <asp:RangeValidator ID="RangeValidator1" runat="server" ControlToValidate="txtQTY"
+                                                                                    Display="Dynamic" ErrorMessage="Must be numeric Not 0" MinimumValue="1" Type="Double"
+                                                                                    ValidationGroup="EntryForm" MaximumValue="999999999999"></asp:RangeValidator>
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtQTY"
+                                                                                            Display="Dynamic" ErrorMessage="Required" ValidationGroup="EntryForm"></asp:RequiredFieldValidator>*@
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align="left">
+
+                                                            @Html.TextBoxFor(m => m.UnitPrice, new { id = "txtunitPrice", autocomplete = "off", @class = "form-control" })
+                                                            <lable id="validPrice"></lable>
+                                                            @Html.ValidationMessageFor(m => m.UnitPrice, "", new { @class = "text-danger" })
+
+
+
+
+                                                            @*<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtUnitPrice"
+                                                                                            Display="Dynamic" ErrorMessage="Required" ValidationGroup="EntryForm"></asp:RequiredFieldValidator>
+                                                                <asp:RangeValidator ID="RangeValidator2" runat="server" ControlToValidate="txtUnitPrice"
+                                                                                    Display="Dynamic" ErrorMessage="Must Be Currency" MinimumValue="0" MaximumValue="999999999.99"
+                                                                                    Type="Double" ValidationGroup="EntryForm"></asp:RangeValidator>*@
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align='left'>
+                                                            <strong>Notes</strong>
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align="left">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align="left">
+                                                            <strong>Line Total</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align='left' colspan="3">
+                                                            @*<asp:TextBox ID="txtNotes" TabIndex="6" runat="server" Width="400px" MaxLength="2000" />
+                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtNotes" runat="server" ControlToValidate="txtNotes"
+                                                                                            Display="Dynamic" ErrorMessage="Required" ValidationGroup="EntryForm"></asp:RequiredFieldValidator>*@
+                                                            @Html.TextBoxFor(model => model.Notes, new { id = "txtNotes", @class = "form-control " })
+                                                            @Html.ValidationMessageFor(model => model.Notes)
+
+                                                        </td>
+                                                        <td width="25px">
+                                                            &nbsp;
+                                                        </td>
+                                                        <td align='left' valign="top">
+                                                            @*<asp:TextBox ID="txtLineTotal" TabIndex="7" runat="server" Width="100px" MaxLength="15"
+                                                                Enabled="False" />*@
+
+                                                            @Html.TextBoxFor(model => model.Extended_Price, new { id = "txttotal", @class = "form-control " })
+                                                            @Html.ValidationMessageFor(model => model.Notes)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5" align="right">
+                                                            @*<asp:Button ID="txtClear" TabIndex="8" runat="server" Text="Clear" Width="150px" CausesValidation="false" />*@
+                                                            <input type="button" class="btn btn-primary" onclick="myFunction()" value="Clear" />
+                                                            @*<asp:Button ID="txtSave" TabIndex="9" runat="server" Text="Save And New" Width="150px" ValidationGroup="EntryForm"
+                                                                CausesValidation="true" />*@
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5" align="center">
+                                                            <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="False" Font-Size="Medium" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            }
+
+                                @*<table width="95%" cellpadding="1" cellspacing="1">
+                                    <tbody>
+                                        <tr>
+                                            <td align="left">
+                                                <strong>Association</strong>
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td colspan="3" align="left">
+                                                Products
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <select name="ctl00$ContentPlaceHolder1$ddlHOAList"
+                                                        id="ctl00_ContentPlaceHolder1_ddlHOAList">
+                                                    <option value="0"></option>
+                                                    <option value="143">
+                                                        1001 Hillsborough Street Residential Condo HOA, Inc.
+                                                    </option>
+                                                    <option value="154">
+                                                        10th Street Townes Condominium Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="605">2607 East 7th Street Association, Inc.</option>
+                                                    <option selected="selected" value="369">
+                                                        515 Downtown Townhomes Owners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="155">601 Queens Condominium Association, Inc</option>
+                                                    <option value="156">
+                                                        811 Queens Road Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="485">Abbotts Glen Homeowner's Association, Inc.</option>
+                                                    <option value="280">
+                                                        Abernathy Place Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="443">Adams Point Community Association, Inc.</option>
+                                                    <option value="371">
+                                                        Addison Reserve Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="372">Alexander Place Townhome Association, Inc.</option>
+                                                    <option value="513">
+                                                        Alexander Ridge Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="527">Amber Leigh Homeowners Association, Inc.</option>
+                                                    <option value="635">Amber Meadow Homeowners Association, Inc.</option>
+                                                    <option value="457">
+                                                        Amberlynn Valley Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="279">Anniston Grove Homeowners Association, Inc</option>
+                                                    <option value="112">Arbor Glen Community Association, Inc.</option>
+                                                    <option value="349">
+                                                        Ardrey Place Property Owner's Association, Inc.
+                                                    </option>
+                                                    <option value="129">
+                                                        Ardwyck Townhomes Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="604">Assembly Tower Center Association, Inc.</option>
+                                                    <option value="537">Auburn Place Homeowners Association, Inc.</option>
+                                                    <option value="507">
+                                                        Austin Creek Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="599">B/Spoke Townhomes Owners Association, Inc.</option>
+                                                    <option value="373">
+                                                        Balmoral at MacGregor Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="414">
+                                                        Balmoral Townhome Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="458">
+                                                        Balmoral Townhome Phases II And III Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="426">Barham Crossing Owners Association, Inc.</option>
+                                                    <option value="310">
+                                                        Barrington Village Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="304">Bear Creek Property Owners Association,Inc.</option>
+                                                    <option value="315">
+                                                        Belmont of Cary Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="542">Bennett Landing Unit Owners Association</option>
+                                                    <option value="348">Berkeley Homeowners Association, Inc.</option>
+                                                    <option value="270">Biddleville at French Square</option>
+                                                    <option value="423">Blackstone Meadows Homeowners Association</option>
+                                                    <option value="547">Blenheim Place Homeowners Association, Inc.</option>
+                                                    <option value="610">Bonnie Doon Homeowners Association, Inc.</option>
+                                                    <option value="264">
+                                                        Bordeaux Of Lake Norman Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="448">Boulder Creek Owners Association, Inc.</option>
+                                                    <option value="609">Braddock Park Homeowners Association, Inc.</option>
+                                                    <option value="374">Braddock Park Townhome Association, Inc.</option>
+                                                    <option value="450">
+                                                        Braeburn of Franklin County Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="151">
+                                                        Braxton Estates Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="540">
+                                                        Briarwood Plantation Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="548">
+                                                        Bridgewood Homeowners Association, Inc. of Florence,
+                                                        S.C.
+                                                    </option>
+                                                    <option value="546">
+                                                        Brigadoone I &amp; II Homeowners Association, Inc
+                                                    </option>
+                                                    <option value="126">Brighton Homeowners' Association, Inc.</option>
+                                                    <option value="522">
+                                                        Brighton Ridge Subdivision Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="490">Brook Forest HOA, Inc.</option>
+                                                    <option value="324">
+                                                        Bucksville Oaks Property Owner's Association, Inc.
+                                                    </option>
+                                                    <option value="550">Camellia Crossings HOA, Inc.</option>
+                                                    <option value="144">
+                                                        Cameron Estates Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="288">Cameron Wood Homeowners Association, Inc.</option>
+                                                    <option value="549">Campo Anna Condominium Association, Inc.</option>
+                                                    <option value="603">Campo Firenze II Condominium Assn. Inc.</option>
+                                                    <option value="444">Carmel Hollow Homes Association</option>
+                                                    <option value="278">Carriage Downs Homeowners Association, Inc.</option>
+                                                    <option value="127">
+                                                        Carriage Meadows Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="328">Carriage Park Homeowners Association, Inc.</option>
+                                                    <option value="107">
+                                                        Carrington Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="510">Carson’s Creek Open Space Corporation</option>
+                                                    <option value="516">Carya Pond Homeowners Association</option>
+                                                    <option value="499">
+                                                        Central Park Townhomes at Ayrsley Association, Inc.
+                                                    </option>
+                                                    <option value="552">Chandler Crest HOA, Inc</option>
+                                                    <option value="378">Chandlers Ridge Owners Association, Inc.</option>
+                                                    <option value="416">
+                                                        Chatham Court Townhome Property Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="456">
+                                                        Chatham Homeowners Association of Mallard Creek,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="130">Chatsworth Homeowners Association, Inc</option>
+                                                    <option value="634">Chelsea Woods Community Association, Inc.</option>
+                                                    <option value="169">
+                                                        Chesapeake Pointe Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="325">
+                                                        Churchill Falls Home Owners' Association, Inc.
+                                                    </option>
+                                                    <option value="611">
+                                                        Clarkedale Subdivision Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="554">Claussen Commons Homeowners Association</option>
+                                                    <option value="502">Colonial Brook Homeowners Association, Inc.</option>
+                                                    <option value="170">Colony Crossing I Homeowners Regime</option>
+                                                    <option value="300">
+                                                        Colony Crossing II Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="301">Colony Crossing Swim Club, Inc.</option>
+                                                    <option value="480">
+                                                        Colony Professional Center Condominium Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="171">Colvard Park Owners Association, Inc.</option>
+                                                    <option value="636">
+                                                        Cooper Square Condominium Owners' Association, Inc.
+                                                    </option>
+                                                    <option value="356">Copper Creek Homeowners Association, Inc.</option>
+                                                    <option value="449">Cottages at the Landing HOA, Inc.</option>
+                                                    <option value="172">Coulwood Oaks Homeowners Association, Ltd.</option>
+                                                    <option value="174">Courance Property Owners Association, Inc.</option>
+                                                    <option value="482">Coventry Court Homeowners Association, Inc.</option>
+                                                    <option value="556">
+                                                        Coventry Place Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="153">Cramer Woods Homeowners Association, Inc.</option>
+                                                    <option value="452">
+                                                        Creek's Edge Homeowners Association Of York, Inc.
+                                                    </option>
+                                                    <option value="526">Creekside Townhomes Association</option>
+                                                    <option value="121">
+                                                        Crestland Place Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="305">Crowders View Owners Association, Inc.</option>
+                                                    <option value="176">
+                                                        Crown View Condominium Owners Association, Inc.
+                                                    </option>
+                                                    <option value="586">Curtis Mountain Property Owners Association</option>
+                                                    <option value="287">Davis Trace Homeowners Association, Inc.</option>
+                                                    <option value="318">
+                                                        Dayton Woods Phases Two and Three Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="477">
+                                                        Deer Creek Falls Property Owners' Association, Inc.
+                                                    </option>
+                                                    <option value="120">Deer Park Neighborhood Association, Inc.</option>
+                                                    <option value="274">
+                                                        Diamond Falls Estates Property Owners Association
+                                                    </option>
+                                                    <option value="571">
+                                                        Dock Street at the Market Common R-8 Homeowners'
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="612">
+                                                        Dogwood Cove Subdivision Homeowners Association Inc
+                                                    </option>
+                                                    <option value="427">
+                                                        Drury Drive Townhome Owners Association, Inc.
+                                                    </option>
+                                                    <option value="497">
+                                                        East Village Condominium Home Owners' Association
+                                                    </option>
+                                                    <option value="342">Eastover Villa Condominium Association</option>
+                                                    <option value="379">Eastowne Hills Officeowners Association</option>
+                                                    <option value="613">Ebenezer Chase Homeowners Association</option>
+                                                    <option value="245">
+                                                        Edgewood Trace Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="495">
+                                                        Elizabeth on Fifth Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="179">
+                                                        Elizabeth on the Park Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="518">
+                                                        Emorywood Orchards Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="614">Essex Park Owners Association, Inc.</option>
+                                                    <option value="521">
+                                                        Estates at Wynchase Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="309">
+                                                        Fairground Pointe Homeowners' Association, Inc.
+                                                    </option>
+                                                    <option value="323">Fairington Oaks Community Association, Inc.</option>
+                                                    <option value="593">Fairview Downs Owners Association, Inc.</option>
+                                                    <option value="558">
+                                                        Fairway Court Homeowners' Association, Inc of
+                                                        Florence S.C.
+                                                    </option>
+                                                    <option value="432">Fernbrook Association, Inc.</option>
+                                                    <option value="534">Fernbrook III Homeowners Association, Inc.</option>
+                                                    <option value="543">Fernhill Homeowners Association, Inc.</option>
+                                                    <option value="117">Fieldstone Homeowners Association, Inc.</option>
+                                                    <option value="459">
+                                                        Forest Oaks Community Association of Johnston
+                                                        County, Inc.
+                                                    </option>
+                                                    <option value="181">Forest Pond Homeowners Association, Inc.</option>
+                                                    <option value="106">Forest Ridge Homeowners Association, Inc.</option>
+                                                    <option value="116">
+                                                        Fountaingrove Homeowners Association of Mecklenburg,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="557">Foxboro Condominium Association, Inc.</option>
+                                                    <option value="559">Foxfire Condominium Association, Inc.</option>
+                                                    <option value="451">Ganyard Towns Homeowners Association, Inc.</option>
+                                                    <option value="182">
+                                                        Garden District Row Property Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="183">Garden Oaks Townhome Association, Inc.</option>
+                                                    <option value="429">Glenn Laurel Homeowners Association, Inc.</option>
+                                                    <option value="560">
+                                                        Governor's Square I And Governor's Square II
+                                                        Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="252">Greene Croft Association</option>
+                                                    <option value="186">
+                                                        Greenview Terraces Townhomes Association, Inc.
+                                                    </option>
+                                                    <option value="355">
+                                                        Greyson's Green Recreational Association, Inc.
+                                                    </option>
+                                                    <option value="445">Greystone Manor Townhomes Association, Inc.</option>
+                                                    <option value="262">
+                                                        Hamilton Place Homeowners Association of Union
+                                                        County, Inc.
+                                                    </option>
+                                                    <option value="187">
+                                                        Hampton Manor Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="501">Hampton Pointe Homeowners Association, Inc.</option>
+                                                    <option value="562">Hampton Pointe Owners Association, Inc.</option>
+                                                    <option value="453">
+                                                        Harrington Pines Community Association, Inc.
+                                                    </option>
+                                                    <option value="290">
+                                                        Harrogate at the Lake Homeowners Association
+                                                    </option>
+                                                    <option value="248">
+                                                        Hartwell Villas Association of Residence Owners,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="353">
+                                                        Haw Creek Heights of Asheville Association, Inc.
+                                                    </option>
+                                                    <option value="388">
+                                                        Heritage Townhomes of Hillsborough Homeowners
+                                                        Association, Inc
+                                                    </option>
+                                                    <option value="336">Hersham Mews Homeowners Association, Inc.</option>
+                                                    <option value="327">
+                                                        Hidden Creek Townes, Homeowners Association Inc.
+                                                    </option>
+                                                    <option value="335">Hidden Palms Home Owners Association, Inc.</option>
+                                                    <option value="615">Highgate Subdivision Homeowners Association</option>
+                                                    <option value="362">Highland Creek of Lancaster HOA</option>
+                                                    <option value="462">
+                                                        Highland Lake Residential Homeowners' Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="577">HOA at Spring Haven, Inc.</option>
+                                                    <option value="561">
+                                                        Hoffmeyer Crossings Property Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="616">
+                                                        Hoffmeyer Villas Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="145">Holden Farm Homeowners Association, Inc.</option>
+                                                    <option value="390">Holly Brook Homeowners Association, Inc.</option>
+                                                    <option value="338">Hope Crossing Homeowners Association, Inc.</option>
+                                                    <option value="617">Hunter's Creek Homeowners Association, Inc.</option>
+                                                    <option value="352">Hunters Pointe Homeowners Association</option>
+                                                    <option value="257">
+                                                        Independence Pointe Office Association, Inc.
+                                                    </option>
+                                                    <option value="463">Jamestowne II Homeowners Association, Inc.</option>
+                                                    <option value="618">Jefferson Pointe Homeowners Association</option>
+                                                    <option value="594">Kaledon Acres Homeowners' Association, Inc.</option>
+                                                    <option value="587">Kelly West Homeowners Association, Inc.</option>
+                                                    <option value="189">Kenmore House Condominiums Association</option>
+                                                    <option value="341">
+                                                        Kensington Court Condominium Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="326">Kimmon Place Homeowners Association, Inc.</option>
+                                                    <option value="367">King Heights Homeowners Association, Inc.</option>
+                                                    <option value="592">King John Condominiums Association, Inc.</option>
+                                                    <option value="563">Kings Court Homeowners Association, Inc.</option>
+                                                    <option value="142">
+                                                        Kistler Mill Homeowners Association of Iredell, Inc.
+                                                    </option>
+                                                    <option value="191">Kuralt House Court Owners Association, Inc.</option>
+                                                    <option value="478">Kyndal Community Association, Inc.</option>
+                                                    <option value="483">
+                                                        Lake Julian Trails Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="192">Latta Square Condominium Association, Inc.</option>
+                                                    <option value="528">
+                                                        Launch Landing Property Owner's Association, Inc.
+                                                    </option>
+                                                    <option value="420">Laurel Crossing Townhomes Association, Inc.</option>
+                                                    <option value="322">
+                                                        Laurel Hills (Clarks Chapel Shelter Company)
+                                                        Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="391">
+                                                        Laurel Village of Durham Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="195">
+                                                        Lennox Square Townhomes Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="133">
+                                                        Lexington Commons of Monroe Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="105">
+                                                        Linda Vista II, Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="487">Linden Hall Homeowners Association, Inc.</option>
+                                                    <option value="506">
+                                                        Long Creek Meadows Homeowners' Association, Inc.
+                                                    </option>
+                                                    <option value="102">Loxdale Homeowners Association, Inc.</option>
+                                                    <option value="514">
+                                                        Lumina Club Townhouses and Owners Association, Inc.
+                                                    </option>
+                                                    <option value="431">Lynn Ridge Homeowners Association, Inc.</option>
+                                                    <option value="363">
+                                                        Lynwood Estates Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="476">Madison Glen Community Association, Inc.</option>
+                                                    <option value="196">Madison Glen Homeowners Association, Inc.</option>
+                                                    <option value="104">
+                                                        Madison Village Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="596">
+                                                        Magnolia Glen Condominium Owners Association, Inc.
+                                                    </option>
+                                                    <option value="266">
+                                                        Manchester Place Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="197">
+                                                        Manhattan Chase Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="544">
+                                                        Manzanares Neighborhood Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="619">Marsh Pointe I Homeowner's Association</option>
+                                                    <option value="567">
+                                                        Marsh Pointe II Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="568">
+                                                        Marsh Pointe III Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="620">
+                                                        Marsh Pointe IV Homeowner's Association, Inc.
+                                                    </option>
+                                                    <option value="198">
+                                                        Matthews Estates Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="249">
+                                                        Matthews Township Office Park Association, Inc.
+                                                    </option>
+                                                    <option value="591">
+                                                        Maybrook Crossings Community Association, Inc.
+                                                    </option>
+                                                    <option value="545">McKee Place Homeowners Association, Inc.</option>
+                                                    <option value="438">Meadow Creek Homeowners' Association, Inc.</option>
+                                                    <option value="566">Meadow Greens Homeowners Association, Inc.</option>
+                                                    <option value="394">
+                                                        Merritt Park Condominium Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="519">Mews Townhomes Owners Association, Inc.</option>
+                                                    <option value="200">
+                                                        Midwood Meadows Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="621">Millwood Run Neighborhood Board</option>
+                                                    <option value="622">Monticello Homeowners Association</option>
+                                                    <option value="493">Montreux Homeowners' Association, Inc.</option>
+                                                    <option value="538">
+                                                        Moonlight Bay on Lake Keowee Property Owners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="360">Moss Creek Community Association, Inc.</option>
+                                                    <option value="132">Mulberry Pond Homeowners Association, Inc.</option>
+                                                    <option value="173">
+                                                        NC Country Club Estates Owners Association, Inc.
+                                                    </option>
+                                                    <option value="428">
+                                                        Northampton Townhomes Owners Association, Inc.
+                                                    </option>
+                                                    <option value="275">Northclift Townhouse Association, Inc</option>
+                                                    <option value="442">
+                                                        Oaks of Guilford Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="536">
+                                                        Offices at Matthews Medical Plaza Condominium Owners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="623">
+                                                        Old Ebenezer Homeowners Association, Inc. Of
+                                                        Florence, S.C.
+                                                    </option>
+                                                    <option value="396">
+                                                        Old Mill Village Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="354">
+                                                        Olde Statesville Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="491">Olivette Community Association, Inc.</option>
+                                                    <option value="569">Orion Hills Homeowners Association</option>
+                                                    <option value="332">Pagemore Homeowners Association, Inc.</option>
+                                                    <option value="589">Page's Pond Homeowners Association, Inc.</option>
+                                                    <option value="588">Park Brook Community Association, Inc.</option>
+                                                    <option value="209">Park Place Townhouses Association, Ltd.</option>
+                                                    <option value="291">Park Place Village Association Inc.</option>
+                                                    <option value="397">Parker Pointe Homeowners Association, Inc.</option>
+                                                    <option value="256">
+                                                        Parkwood Knoll Condominium Owners Association, Inc.
+                                                    </option>
+                                                    <option value="422">Patterson Glen Homeowners Association, Inc.</option>
+                                                    <option value="598">
+                                                        Peachtree at Flowers Plantation Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="467">
+                                                        Peachtree Place Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="307">Pebble Creek Townhomes Association</option>
+                                                    <option value="525">Pecan Townes Homeowners Association</option>
+                                                    <option value="212">Pheasant Knoll Townhouse Association</option>
+                                                    <option value="424">Phoenix Place Homeowners Association</option>
+                                                    <option value="489">Pine Glen Homeowners Association, Inc.</option>
+                                                    <option value="624">
+                                                        Pine Lakes Court Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="164">Plaza Midwood Place Association, Inc.</option>
+                                                    <option value="570">Point South Homeowners Association, Inc</option>
+                                                    <option value="496">
+                                                        Presque Isle Villas Condominium Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="254">
+                                                        Prestwick Homeowners Association of Union County,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="606">
+                                                        Princeton Manor Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="214">
+                                                        Providence Plantation Estates Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="311">Quail Meadows Homeowners Association, Inc.</option>
+                                                    <option value="215">Queens Mark Condominium Association, Inc.</option>
+                                                    <option value="498">
+                                                        Queens Station Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="399">
+                                                        Rand Meadows Phases II &amp; III Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="494">
+                                                        Red Oak Estates Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="590">
+                                                        Red Wolf Run Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="308">Reid Lane Association, Inc.</option>
+                                                    <option value="216">
+                                                        Renaissance on Carmel Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="251">
+                                                        Renaissance on Carmel II Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="440">
+                                                        Revere Court Townhomes Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="535">
+                                                        Richmond Hill Condominium Homeowners Association
+                                                    </option>
+                                                    <option value="572">
+                                                        Richmond Hills Home Owners Association, Inc.
+                                                    </option>
+                                                    <option value="110">Ridgemont Homeowners Association, Inc.</option>
+                                                    <option value="268">
+                                                        River Country Estates Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="515">
+                                                        Riverbend Highlands Property Owners Association
+                                                    </option>
+                                                    <option value="533">
+                                                        Riverside Commons Homeowners' Association, Inc.
+                                                    </option>
+                                                    <option value="400">Roberson Place Homeowners Association, Inc.</option>
+                                                    <option value="361">Rose Hall Homeowners Association, Inc.</option>
+                                                    <option value="217">Roswell House Homeowners' Association, Inc.</option>
+                                                    <option value="267">Roxbury Homeowners Association, Inc.</option>
+                                                    <option value="401">Saddle Run Community Association, Inc</option>
+                                                    <option value="512">
+                                                        Sapphire Manor Condominiums Association Three
+                                                    </option>
+                                                    <option value="454">Scenic Wolf Master Association, Inc.</option>
+                                                    <option value="331">
+                                                        Searstone Village Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="221">Sharon Commons Homeowners Association, Inc.</option>
+                                                    <option value="223">Sheffield Point Townhomes Association, Inc.</option>
+                                                    <option value="346">
+                                                        Silverlake of Cary Community Association, Inc.
+                                                    </option>
+                                                    <option value="530">
+                                                        Sixth &amp; Pine - Townhouses on the Park Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="625">Smythe Place Homeowners Association Inc</option>
+                                                    <option value="575">South Haven Condominium Association, Inc.</option>
+                                                    <option value="626">South Oak Homeowner's Association, Inc.</option>
+                                                    <option value="627">
+                                                        Southbrook Subdivision Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="508">
+                                                        Southside Estates Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="425">
+                                                        Spencer's Gate Homeowner's Association, Inc.
+                                                    </option>
+                                                    <option value="403">SP-FV Condominium Association, Inc.</option>
+                                                    <option value="415">
+                                                        Springhouse Villas Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="281">Springs Meadows Homeowners Association</option>
+                                                    <option value="261">Springs Village Community Association, Inc.</option>
+                                                    <option value="595">
+                                                        St. James Place of Greenville Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="227">
+                                                        St. Peter's Condominium Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="492">
+                                                        Stacked Rock Villas Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="139">
+                                                        Steeplechase Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="282">
+                                                        Sterling Ridge of Fuquay Varina Homeowner's
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="511">
+                                                        Stonebridge of Mint Hill Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="435">Stonehaven Homeowners' Association</option>
+                                                    <option value="404">Stonewall Village Association, Inc.</option>
+                                                    <option value="333">Stonington Homeowners' Association, Inc.</option>
+                                                    <option value="115">Stony Bend Homeowners Association, Inc</option>
+                                                    <option value="576">
+                                                        Stratford Place Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="365">
+                                                        Summer Ridge Townhomes Homeowners Association
+                                                    </option>
+                                                    <option value="573">Summergate Homeowners Association</option>
+                                                    <option value="229">
+                                                        Summit Greenway Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="302">
+                                                        Sunset Mountain Estates Property Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="123">Sunsplendor Homeowners Association, Inc.</option>
+                                                    <option value="255">Swan Run Association of Unit Owners, Inc.</option>
+                                                    <option value="574">
+                                                        Sweetgrass North Homeowners Association, Inc
+                                                    </option>
+                                                    <option value="468">
+                                                        Sweetwater Ridge Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="523">Swiss Pine Lake Community Association</option>
+                                                    <option value="263">Sycamore Grove Homeowners Association, Inc.</option>
+                                                    <option value="259">
+                                                        Talamore Westside Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="481">
+                                                        Tanner Hall Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="441">
+                                                        Tavernier Subdivision Property Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="124">Taylor Glenn Townhomes Association, Inc.</option>
+                                                    <option value="97789">Test workflow association</option>
+                                                    <option value="553">
+                                                        The Association of Homeowners of Chadwick Place, Inc
+                                                    </option>
+                                                    <option value="479">The Cherokee Association Incorporated</option>
+                                                    <option value="253">
+                                                        The Cherokee Condominium Owners Association, Inc.
+                                                    </option>
+                                                    <option value="460">
+                                                        The Club Cottages at Pebble Creek Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="486">The Creeks at Millstone Association, Inc.</option>
+                                                    <option value="509">
+                                                        The Creeks at Millstone Phase 2 Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="505">The Enclave Community Association, Inc.</option>
+                                                    <option value="299">
+                                                        The Falls Townhomes Owners' Association, Inc.
+                                                    </option>
+                                                    <option value="185">
+                                                        The Graham Court Homeowner's Association, Inc.
+                                                    </option>
+                                                    <option value="366">
+                                                        The Headwaters Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="306">The Lalique Homeowners Association</option>
+                                                    <option value="531">
+                                                        The Landing at Hickory Grove Homeowners Association
+                                                    </option>
+                                                    <option value="564">
+                                                        The Linkside Village Property Owners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="330">
+                                                        The Maggie Valley Club Condominium Association
+                                                    </option>
+                                                    <option value="585">
+                                                        The Oaks Landis Homeowners' Association, Inc.
+                                                    </option>
+                                                    <option value="437">
+                                                        The Park at Langston East Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="413">
+                                                        The Preserve at Long Branch Farms Homeowners
+                                                        Association, Inc.
+                                                    </option>
+                                                    <option value="488">
+                                                        The Regatta at Lake Hartwell Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="628">The Shadowmoss Owners Association, Inc.</option>
+                                                    <option value="464">
+                                                        The Tremont Condominium Owners Association, Inc.
+                                                    </option>
+                                                    <option value="316">The Tropicana Homeowners Association</option>
+                                                    <option value="578">
+                                                        The Village At Ebenezer Homeowners Association
+                                                    </option>
+                                                    <option value="436">
+                                                        The Village at Sycamore Owners Association, Inc.
+                                                    </option>
+                                                    <option value="246">
+                                                        The Village on Park Homeowners' Association, Inc.
+                                                    </option>
+                                                    <option value="320">
+                                                        The Villas at Hanford Property Owners' Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="597">
+                                                        The Vineyard Homeowners Association of Charlotte,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="529">Thorn Rose Homeowners Association, Inc.</option>
+                                                    <option value="504">Timber Rock Property Owners Association</option>
+                                                    <option value="364">Topsail Reef Homeowners Association, Inc.</option>
+                                                    <option value="407">
+                                                        Townside Terrace Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="600">Toxaway Views Homeowners Association, Inc.</option>
+                                                    <option value="122">Traylee Homeowners Association, Inc.</option>
+                                                    <option value="277">Tree Top Unit Ownership Association, Inc.</option>
+                                                    <option value="417">Triple Crown Homeowners Association, Inc.</option>
+                                                    <option value="484">Tri-Springs Homeowners Association, Inc.</option>
+                                                    <option value="532">Tullamore Homeowners Association, Inc.</option>
+                                                    <option value="234">
+                                                        University Business Center Condominium Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="601">
+                                                        Valley Creek Run Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="446">Viewmont Plaza Owner's Association, Inc.</option>
+                                                    <option value="579">
+                                                        Villa Arno Patio Homeowners Association, Inc
+                                                    </option>
+                                                    <option value="629">
+                                                        Villa Toscanna Homeowner's Association, Inc.
+                                                    </option>
+                                                    <option value="329">
+                                                        Village Of Charleston Community Association, Inc.
+                                                    </option>
+                                                    <option value="409">
+                                                        Village Square Townhouse Homeowners Association of
+                                                        Carrboro
+                                                    </option>
+                                                    <option value="461">
+                                                        Village Square Townhouse Homeowners Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="524">Vintage Grove Homeowner's Association, Inc.</option>
+                                                    <option value="580">Vintage Place HOA, Inc.</option>
+                                                    <option value="137">Walden Ridge Owners' Association, Inc</option>
+                                                    <option value="633">Wallbourne Community Association, Inc.</option>
+                                                    <option value="296">Wayland Condominiums Association, Inc.</option>
+                                                    <option value="630">Waynewood Condominium Association,Inc.</option>
+                                                    <option value="584">Wedgewood Homeowner's Association, Inc.</option>
+                                                    <option value="469">
+                                                        Wellington Homeowners Association of Johnston
+                                                        County, Inc.
+                                                    </option>
+                                                    <option value="235">Wellington Homeowners Association, Inc.</option>
+                                                    <option value="583">Wentworth Hall POA of Florence, Inc.</option>
+                                                    <option value="631">West Lakes Homeowners Association</option>
+                                                    <option value="581">
+                                                        Westbrook Homeowners Association, Inc. of Florence
+                                                    </option>
+                                                    <option value="236">Westoak Condominium Association, Inc.</option>
+                                                    <option value="434">Weston Townes Homeowners Association</option>
+                                                    <option value="237">
+                                                        Westwin of Southpark Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="418">Whitby Pond Homeowners Association, Inc.</option>
+                                                    <option value="293">
+                                                        Wildflower Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="602">Willoughby Run Homeowners Association, Inc.</option>
+                                                    <option value="284">Willowmere Community Association, Inc.</option>
+                                                    <option value="503">
+                                                        Wilshire Place Condominium Owners Association, Inc.
+                                                    </option>
+                                                    <option value="412">
+                                                        Windsor Commons Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="357">
+                                                        Windy Ridge Homeowners Association of Monroe, Inc.
+                                                    </option>
+                                                    <option value="260">
+                                                        Windy Ridge Subdivision Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="541">
+                                                        Wolf Ridges Property Owners Association, Inc.
+                                                    </option>
+                                                    <option value="632">Womack Gardens Homeowners Association, Inc.</option>
+                                                    <option value="447">
+                                                        Woodland Trails Condominium Association, Inc.
+                                                    </option>
+                                                    <option value="430">
+                                                        Woodlands Creek Homeowners Association, Inc.
+                                                    </option>
+                                                    <option value="474">
+                                                        Woodstream Glen Townhouse Homeowner's Association,
+                                                        Inc.
+                                                    </option>
+                                                    <option value="582">Wren Creek Homeowners Association, Inc.</option>
+                                                    <option value="343">
+                                                        Wyndmoor At The Park Owners Association, Inc.
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left" colspan="3">
+                                                @Html.DropDownListFor(Model => Model.ProductID, new SelectList(Model.ProductList, "Value", "Text", 1), new { @class = "form-control", id = "ddlProduct" })
+                                                @Html.ValidationMessageFor(m => m.ProductID, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <strong>Date</strong>
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left">
+                                                QTY
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left">
+                                                Unit Price
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+
+                                                <span id="ctl00_ContentPlaceHolder1_RangeValidator3"
+                                                      style="color:Red;display:none;">Must Be a Date</span>
+                                                @Html.TextBoxFor(model => model.invoicedate_string, "{0:dd/MM/yyyy}", new { id = "txtDate", @class = "form-control datepicker", @placeholder = " Date" })
+                                                @Html.ValidationMessageFor(model => model.invoicedate_string)
+                                            </td>
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left">
+                                                @Html.TextBoxFor(m => m.Quantity, new { id = "txtQTY", autocomplete = "off", @class = "form-control" })
+                                                <lable id="validQty"></lable>
+                                                @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+                                                <span id="ctl00_ContentPlaceHolder1_RangeValidator1"
+                                                      style="color:Red;display:none;">Must be numeric Not 0</span>
+                                                <span id="ctl00_ContentPlaceHolder1_RequiredFieldValidator1"
+                                                      style="color:Red;display:none;">Required</span>
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left">
+                                                @Html.TextBoxFor(m => m.UnitPrice, new { id = "txtunitPrice", autocomplete = "off", @class = "form-control" })
+                                                <lable id="validPrice"></lable>
+                                                @Html.ValidationMessageFor(m => m.UnitPrice, "", new { @class = "text-danger" })
+
+
+                                                <span id="ctl00_ContentPlaceHolder1_RequiredFieldValidator2"
+                                                      style="color:Red;display:none;">Required</span>
+                                                <span id="ctl00_ContentPlaceHolder1_RangeValidator2"
+                                                      style="color:Red;display:none;">Must Be Currency</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                                <strong>Notes</strong>
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left">
+                                                &nbsp;
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left">
+                                                <strong>Line Total</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" colspan="3">
+                                                @Html.TextBoxFor(model => model.Notes, new { id = "txtNotes", @class = "form-control " })
+                                                @Html.ValidationMessageFor(model => model.Notes)
+                                            </td>
+                                            <td width="25px">
+                                                &nbsp;
+                                            </td>
+                                            <td align="left" valign="top">
+                                                @Html.TextBoxFor(model => model.Extended_Price, new { id = "txttotal", @class = "form-control " })
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" align="right">
+                                                <input type="button" class="btn btn-primary" onclick="myFunction()" value="Clear" />
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" align="center"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>*@
+                                
+                            </div>
+
+
+
+                            <div id="ctl00_ContentPlaceHolder1_plnFilter" widith="90%" style="text-align:center;">
+                                <table width="95%" cellpadding="1" cellspacing="1">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>Filter:</strong>
+                                            </td>
+                                            <td>
+                                                Start:
+                                            </td>
+                                            <td align="left">
+                                                <input name="ctl00$ContentPlaceHolder1$txtFilterBegDate" type="text"
+                                                       value="11/06/2020" id="ctl00_ContentPlaceHolder1_txtFilterBegDate"
+                                                       style="width:150px;" />
+                                            </td>
+                                            <td width="20px">&nbsp;</td>
+                                            <td>
+                                                End:
+                                            </td>
+                                            <td align="left">
+                                                <input name="ctl00$ContentPlaceHolder1$txtFilterEndDate" type="text"
+                                                       value="11/07/2020" id="ctl00_ContentPlaceHolder1_txtFilterEndDate"
+                                                       style="width:150px;" />
+                                            </td>
+                                            <td width="20px">&nbsp;</td>
+                                            <td align="left">Filter will only bring back unexported data</td>
+                                            <td>
+                                                <input type="button" name="ctl00$ContentPlaceHolder1$btnFilter"
+                                                    onclick="ShowExpenseList()"   value="Filter" id="ctl00_ContentPlaceHolder1_btnFilter"
+                                                       style="width:150px;" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="ctl00_ContentPlaceHolder1_pnlListOfChanges" widith="90%" style="text-align:center;">
+                                <table width="95%" cellpadding="1" cellspacing="1">
+                                    <tbody>
+                                        <tr>
+                                            <td width="100%">
+                                                <div>
+                                                    <table cellspacing="0" cellpadding="4" align="Center" rules="rows"
+                                                           border="1" id="ctl00_ContentPlaceHolder1_gvExpnenses"
+                                                           style="width:100%;border-collapse:collapse;">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="7">No Expenses Entered</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <input type="hidden" name="ctl00$ContentPlaceHolder1$Maskededitextender2_ClientState"
+                                   id="ctl00_ContentPlaceHolder1_Maskededitextender2_ClientState" />
+                            <input type="hidden" name="ctl00$ContentPlaceHolder1$Maskededitextender1_ClientState"
+                                   id="ctl00_ContentPlaceHolder1_Maskededitextender1_ClientState" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+   @*</form>*@
+
+</body>
+</html>  <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="~/Content/css/ui.jqgrid.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/grid.locale-en.js"></script>
+<script src="~/Content/js/jqgrid-library.js"></script>
+    <script>
+     $(document).ready(function () {
+
+             //   $("#txtDate").datepicker({ dateFormat: 'dd/mm/yy' });
+        // ShowExpenseList(); 
+
+         $("#txtQTY").on('change', function () {
+
+             var inputVal = this.value;
+             var inputValPrice = parseInt($("#txtunitPrice").val());
+
+             if ($.isNumeric(inputVal) != true) {
+                 $("#txtQTY").text("QTY Not Numeric");
+             } else {
+                 alert('txtoty');
+                 var total = inputVal * inputValPrice;
+                 $("#txttotal").val(total);
+             }
+         });
+
+         $("#txtunitPrice").on('change', function () {
+             alert('hi');
+             var inputVal = this.value;
+             var inputValQty = parseInt($("#txtQTY").val());
+             console.log(inputValQty);
+             if ($.isNumeric(inputVal) != true) {
+                 $("#validPrice").text("Unit Price Not Numeric");
+
+             } else {
+                 var total = inputVal * inputValQty;
+                 $("#txttotal").val(total);
+             }
+         });
+
+
+     });
+    
+
+     $("#ddlProduct").on('change', function(){
+
+         var inputVal = parseInt($("#txtQTY").val());
+         var inputValPrice = parseInt($("#txtunitPrice").val());
+              if (inputVal != '' && inputValPrice!='') {
+                   var total = inputVal * inputValQty;
+                   $("#txttotal").val(total);
+              }
+         });
+
+
+
+
+     function ShowExpenseList() {
+         try {
+            var startDate = $("#ctl00_ContentPlaceHolder1_txtFilterBegDate").val();
+            var endDate = $("#ctl00_ContentPlaceHolder1_txtFilterEndDate").val();
+            console.log(startDate);
+            debugger;
+             InitGrid();
+            GridJq.addCol({ Name: 'InvoiceItemID', DBName: "InvoiceItemID", Index: "InvoiceItemID", Key: true, Hidden: true });
+             GridJq.addCol({ Name: 'Client_Name', DBName: "Client_Name", Width: '1%', Index: "Client_Name" });
+             GridJq.addCol({ Name: 'Product_Description', DBName: "Product_Description", Width: '1%', Index: "Product_Description" });
+             GridJq.addCol({ Name: 'invoicedate', DBName: "invoicedate", Width: '1%', Index: "invoicedate" });
+             GridJq.addCol({ Name: 'Quantity', DBName: "Quantity", Width: '1%', Index: "Quantity" });
+             GridJq.addCol({ Name: 'UnitPrice', DBName: "UnitPrice", Width: '1%', Index: "UnitPrice" });
+             GridJq.addCol({ Name: 'Extended_Price', DBName: "Extended_Price", Width: '1%', Index: "Extended_Price" });
+ 
+             GridJq.addCol({ Name: 'Action', DBName: "Action", Width: '1%', Index: "Action", Customfunction: true, Formatter: 'DisplayActionItems' });
+             GridJq.SortName = "InvoiceItemID";
+             GridJq.LoadOnce = false;
+             GridJq.SortOrder = "desc";
+             GridJq.GridId = "ctl00_ContentPlaceHolder1_gvExpnenses";
+            // GridJq.Pager = '#divBannerPager';
+             GridJq.Url = '@Url.Action("GetExpenseByFilter", "Expense")' + 'startDate=' + startDate '&endDate'=+ endDate;
+             GridJq.IsEditable = false;
+             showGrid(GridJq);
+             $(".ui-pg-input").css({ 'height': 'inherit' });
+         }
+         catch (err) {
+             document.write(err.message);
+         }
+     }
+    </script>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href=@Url.Content("~/Content/css/jquery-ui.css") />
+    <link rel="stylesheet" href="~/Content/css/ui.jqgrid.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+    
+</script>
